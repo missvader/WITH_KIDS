@@ -1,20 +1,20 @@
 import './App.css'
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { Route, Routes } from 'react-router-dom';
-import MapView from './components/MapView'
 import Home from './pages/Home';
-import Data from './components/Data'
-import { DataContextProvider } from './contexts/DataContext'
+import Intro from './pages/Intro';
+import Data from './contexts/Data'
 import List from './components/List';
 function App() {
 
   return (
-    <DataContextProvider>
+    <Data>
       <Routes>
-        < Route path = "/" element = { <Home/>}/>
+        < Route path = "/" element = { <Intro/>}/>
         < Route path = "/list" element = {<List/>}/>
-        < Route path='/map' element = {<MapView/>}/>
+        < Route path='/map' element = {<Home/>}/>
       </Routes>
-    </DataContextProvider>
+    </Data>
   )
 }
 

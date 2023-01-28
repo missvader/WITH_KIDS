@@ -1,16 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useEffect } from "react";
+import mapboxgl from "mapbox-gl";
+import MapComponent from "../components/MapComponent";
 const Home = () => {
-  return (
-    <div>
-      <h1>HOME PAGE IN CONSTRUCTION</h1>
-      <Link to="/list" className=" link">
-        <button className=" btn  m-5 ">LIST DATA</button>
-      </Link>
-      <Link to="/map" className="link">
-        <button className=" btn m-5 ">MAP</button>
-      </Link>
+  /**/
+  return(
+    <div className="container bg-verde h-screen flex-col flex">
+      <div className="map " id="map">
+        <MapComponent/>
+      </div>
+        
+      
+      <div className="start bg-naranja ">Start Section</div>
     </div>
   )
 }
+
 export default Home;
