@@ -1,12 +1,11 @@
 import React, { useRef, useEffect, useContext} from 'react';
 import mapboxgl from 'mapbox-gl'; 
 import { DataContext } from "../contexts/DataContext";
-/*import IconLila from "../assets/iconLila.svg";*/
-/*import IconVerde from "../assets/iconVerde.svg";*/
-/*import IconNaranja from "../assets/iconNaranja.svg";*/
+import Restaurants from "../data/restaurants.json"
 import IconNaranja from "../assets/icons-map/_event-ticket.svg";
 import IconVerde from "../assets/icons-map/_playground.svg";
 import IconLila from "../assets/icons-map/_event-book.svg";
+import IconYellow from "../assets/icons-map/_restaurant.svg"
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
 const MapComponent = () => {
@@ -89,6 +88,8 @@ const MapComponent = () => {
   imageIconVerde.src = IconVerde;
   const imageIconNaranja = new Image();
   imageIconNaranja.src= IconNaranja;
+  const imageIconYellow = new Image();
+  imageIconYellow.src = IconYellow;
   
   const mapContainer = useRef();
   // this is where all of our map logic is going to live
@@ -107,6 +108,7 @@ const MapComponent = () => {
     map.addImage('lila', imageIconLila);
     map.addImage("naranja", imageIconNaranja );
     map.addImage("verde", imageIconVerde);
+    map.addImage("amarillo", imageIconYellow);
     map.addSource("biblio", {
       type: "geojson",
       data: geojsonBiblio
@@ -118,7 +120,11 @@ const MapComponent = () => {
     map.addSource("actividades", {
       type: "geojson",
       data: geojsonAgenda
-    })
+    });
+    map.addSource("restaurantes", {
+      type: "geojson",
+      data: Restaurants
+    });
     map.addLayer({
       id: "biblio-circle",
       type: "symbol",
@@ -146,6 +152,15 @@ const MapComponent = () => {
         "icon-size": 0.25
       }
     });
+    map.addLayer({
+      id: "restaurants-circle",
+      type: "symbol",
+      source: "restaurantes",
+      layout: {
+        "icon-image": 'amarillo',
+        "icon-size": 0.25
+      }
+    })
    });
   }, []);
   
