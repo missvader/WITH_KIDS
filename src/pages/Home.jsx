@@ -4,7 +4,7 @@ import MapComponent from "../components/MapComponent";
 const Home = () => {
   /**/
   return(
-    <div className="container bg-verde h-screen flex-col flex">
+    <div className="container  h-screen flex-col flex">
       <div className="map " id="map">
         <MapComponent/>
       </div>
