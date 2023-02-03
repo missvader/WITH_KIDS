@@ -14,7 +14,7 @@ const Nav = () => {
     <div className="nav h-1/6 flex flex-col w-full m-auto bg-blanco fixed bottom-0 ">
       <div className="flex m-auto">
         <NavLink
-          to={",/map"}
+          to={"./"}
         >
           <button className="btn btn-xs bg-stone-400 border-0">
           <Icon path={mdiMapOutline} size={1} />
