@@ -18,7 +18,7 @@ function Data({children}){
     userLocation : undefined,
   }
 
-	//inicializamos estados del listado de data 
+	//DATA STATES
   const [parques, setParques] = useState([]);
   const [actividades, setActividades] = useState([]);
   const [actBiblio, setActBiblio] = useState([]);
@@ -26,10 +26,8 @@ function Data({children}){
   const [geoBiblio, setGeoBiblio] = useState([]);
   const [geoParques, setGeoParques] = useState([]);
   const [geoRestaurantes, setGeoRestaurantes] = useState([]);
-  /*FALTAN LOS RESTAURANTES */
-
   
-  
+  //GET DATA FROM APIS
   useEffect(() => {
     async function getActivities() {
       const response = await agenda.get();
@@ -52,6 +50,7 @@ function Data({children}){
     getParques();
   }, []); 
   
+//GEOJSON DATA 
  useEffect(() => {
     let geojsonAgenda = {
       "type": "FeatureCollection",
@@ -128,7 +127,7 @@ function Data({children}){
   setGeoParques(geojsonParques);
  }, [parques]);
 useEffect(() => {
-  setGeoRestaurantes({Restaurants})
+  setGeoRestaurantes(Restaurants)
 },[]);
 	// Retornamos el Provider con el estado que será global con la función que lo actualiza
 	return (

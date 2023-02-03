@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mdi/js": "^7.1.96",
+    "@mdi/react": "^1.6.1",
     "axios": "^1.2.3",
     "daisyui": "^2.47.0",
     "mapbox-gl": "^2.12.0",
