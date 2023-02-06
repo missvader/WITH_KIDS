@@ -5,7 +5,9 @@ const Actividad = ({titol, adreca, data,entrades, image, errorImage, url, link})
   const urlImage = `https://agenda.cultura.gencat.cat` + image;
   const urlErrorImage = `https://agenda.cultura.gencat.cat` + errorImage;
   const linkToUrl = link.split(",");
-  console.log(linkToUrl);
+  /* ------- ESTOS ERRORES Y WARNINGS SON POR LAS urlIMAGES--------------------------
+  Revisar error de chrome -->  indicate wheter to send a cookie in a cross-site request by     specifying its SameSite attribute
+   tambien revisar --> Cross-Origin Read Blocking (CORB) ha bloqueado la respuesta de orígenes cruzados <URL> con el tipo de MIME text/html. Consulta la página <URL> para obtener más información. */
   return (
     <div className="mx-auto bg-naranja p-8 ">
     <div className="card lg:card-side bg-base-100 shadow-xl w-96">
@@ -14,7 +16,7 @@ const Actividad = ({titol, adreca, data,entrades, image, errorImage, url, link})
           alt="agenda activity image"
           onError={(e) => (e.currentTarget.src = urlErrorImage)}
           className= "w-full"
-        /></figure>
+      /></figure>
       <div className="card-body">
         <div className="card-title bg-naranja/25 rounded-lg p-2"> 
           <h2 className="">{titol}</h2>
@@ -26,8 +28,11 @@ const Actividad = ({titol, adreca, data,entrades, image, errorImage, url, link})
         <div className="card-actions justify-end">
           <button 
           className="btn btn-primary btn-xs"
-          onClick={() => window.open(linkToUrl[0])}
-          >MORE INFO</button>
+          ><a
+            href={linkToUrl[0]}
+            target='_blank'
+            >MORE INFO</a>
+          </button>
         </div>
       </div>
     </div>

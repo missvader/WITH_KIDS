@@ -40,8 +40,10 @@ function Data({children}){
     async function getActBiblio() {
       const response = await biblio.get();
       setActBiblio(response.data.elements);
+      
     }
     getActBiblio();
+    console.log()
   }, []); 
   useEffect(() => {
     async function getParques() {
@@ -59,6 +61,7 @@ function Data({children}){
   setFilteredAct(filteredAct);
   console.log(filteredAct)
  }, [actividades]);
+ 
 //GEOJSON DATA 
  useEffect(() => {
     let geojsonAgenda = {
@@ -84,7 +87,7 @@ function Data({children}){
       })
     };
     setGeoAgenda(geojsonAgenda);
- }, [actividades])
+ }, [filteredAct])
  useEffect(() => {
   let geojsonBiblio = {
     "type": "FeatureCollection",
@@ -136,7 +139,7 @@ function Data({children}){
   setGeoParques(geojsonParques);
  }, [parques]);
 useEffect(() => {
-  setGeoRestaurantes(Restaurants)
+  setGeoRestaurantes(Restaurants);
 },[]);
 	// Retornamos el Provider con el estado que será global con la función que lo actualiza
 	return (

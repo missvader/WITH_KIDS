@@ -1,4 +1,3 @@
- 
   {
     "type": "FeatureCollection",
     "features": [
@@ -9,7 +8,8 @@
         "address": "Plaça de la Infància, 11 08020 Barcelona", 
         "phone": 933059935,
         "web": "https://karli.es/",
-        "tags": ["tapas", "menu", "km0"]
+        "tags": ["tapas", "menu", "km0"],
+        "image":"/images/karli.png"
         },
       "geometry": {
           "type": "Point",
@@ -23,7 +23,8 @@
         "address": "Via Augusta, 9 08006 Barcelona", 
         "phone": 932013569,
         "web": "https://www.tiojoe.es/",
-        "tags": ["brasa", "hamburguesas"]
+        "tags": ["brasa", "hamburguesas"],
+        "image":"/images/tio-joe.png"
       },
       "geometry": {
         "type": "Point",
@@ -37,7 +38,8 @@
         "address": "Carrer del Taulat, 95 08005 Barcelona", 
         "phone": 933003790,
         "web": "http://www.aguaribay-bcn.com/",
-        "tags": ["vegetariano", "vegano"]
+        "tags": ["vegetariano", "vegano"],
+        "image": "/images/aguaribay.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -51,7 +53,8 @@
           "address": "Carrer de Bilbao, 98 08005 Barcelona", 
           "phone": 661203978,
           "web": "https://www.instagram.com/caffeinebcn/?hl=es",
-          "tags": ["vegetariano", "vegano", "desayunos", "menu", "rincón de juegos"]
+          "tags": ["vegetariano", "vegano", "desayunos", "menu", "rincón de juegos"],
+          "image":"/images/caffeine.jpg"
         },
         "geometry": {
         "type": "Point",
@@ -65,7 +68,8 @@
         "address": "Carrer de Viladomat, 98 08029 Barcelona", 
         "phone": 934530000,
         "web": "https://www.videoinstan.net/",
-        "tags": ["videoclub", "cine para niños", "cine en familia", "cafeteria", "zona de juegos"]
+        "tags": ["videoclub", "cine para niños", "cine en familia", "cafeteria", "zona de juegos"],
+        "image":"/images/video-instan.jpg"
       },
       "geometry": {
         "type": "Point",
@@ -79,7 +83,8 @@
         "address": "Carrer Jaume Giralt, 53 08003 Barcelona", 
         "phone": 680305774,
         "web": "https://www.facebook.com/SushiDobleZeroo",
-        "tags": ["fusión", "asiática", "japonesa", "monitores"]
+        "tags": ["fusión", "asiática", "japonesa", "monitores"],
+        "image":"/images/doble-zeroo.webp"
       },
       "geometry": {
         "type": "Point",
@@ -107,7 +112,8 @@
         "address": "Carrer Rosselló, 148 08036 Barcelona", 
         "phone": 934531820,
         "web": "https://semproniana.net/",
-        "tags": ["mediterránea", "talleres cocina para niños"]
+        "tags": ["mediterránea", "talleres cocina para niños"],
+        "image":"/images/semproniana.png"
       },
       "geometry": {
         "type": "Point",

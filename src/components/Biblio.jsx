@@ -8,7 +8,7 @@ const Biblio = ({titol, tags, adreca, data, dies, durada, tipus, publico, imatge
       <figure className="h-72"><img 
         src={imatge} 
         alt="biblio activity image"
-        className="w-full"
+        className="w-full h-72"
         /></figure>
       <div className="card-body">
         <div className="card-title bg-lila/25 rounded-lg p-2"> 
@@ -22,8 +22,8 @@ const Biblio = ({titol, tags, adreca, data, dies, durada, tipus, publico, imatge
         
         <div className="card-actions justify-end">
           <button 
-          className="btn btn-primary"
-          onClick={() => window.open(url)}
+          className="btn btn-primary btn-xs"
+          onClick={() => window.open(url, '_blank')}
           >More Info</button>
         </div>
       </div>

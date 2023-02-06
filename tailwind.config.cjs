@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
     colors: {
-      'amarillo': '#F7D979' ,
+      'amarillo': '#eab308' ,
       'naranja' : '#F48A4C' ,
       'lila' : '#9B328B' ,
       'azul' : '#6986F6' ,
