@@ -29,7 +29,7 @@ const Nav = () => {
         <i className="icon user-icon">
           <Icon path={mdiAccount} size={1} />
         </i>
-        <span className="nav-text">Usuari</span>
+        <span className="nav-text text-sm font-bold">Usuari</span>
       </NavLink>
       <NavLink 
         to={"./agendaCultural"}
@@ -37,15 +37,15 @@ const Nav = () => {
         <i className="icon agenda-icon">
           <Icon path={mdiTicket} size={1} />
         </i>
-        <span className="nav-text">Agenda</span>
+        <span className="nav-text text-sm font-bold">Agenda</span>
       </NavLink>
       <NavLink 
         to={"./restaurants"}
         className="nav-item">
         <i className=" icon restaurant-icon">
-          <Icon path={mdiSilverwareForkKnife} size={1} />
+          <Icon path={mdiSilverwareForkKnife}  size={1} />
         </i>
-        <span className="nav-text">Restaurants</span>
+        <span className="nav-text text-sm font-bold">Restaurants</span>
       </NavLink>
       <NavLink 
         to={"./agendaBiblio"}
@@ -53,7 +53,7 @@ const Nav = () => {
         <i className=" icon biblio-icon">
           <Icon path={mdiBookOpenPageVariant} size={1} />
         </i>
-        <span className="nav-text">BiblioAgenda</span>
+        <span className="nav-text text-sm font-bold">BiblioAgenda</span>
       </NavLink>
       <NavLink 
         to={"./zonesDeJoc"}
@@ -61,7 +61,7 @@ const Nav = () => {
         <i className=" icon parc-icon">
           <Icon path={mdiSlide} size={1} />
         </i>
-        <span className="nav-text">Area joc</span>
+        <span className="nav-text text-sm font-bold">Area joc</span>
       </NavLink>
       </div>
       

@@ -21,6 +21,7 @@ function Data({children}){
 	//DATA STATES
   const [parques, setParques] = useState([]);
   const [actividades, setActividades] = useState([]);
+  const [filteredAct, setFilteredAct] = useState([]);
   const [actBiblio, setActBiblio] = useState([]);
   const [geoAgenda, setGeoAgenda] = useState([]);
   const [geoBiblio, setGeoBiblio] = useState([]);
@@ -49,12 +50,20 @@ function Data({children}){
     }
     getParques();
   }, []); 
-  
+ //FILTERED ACTIVITIES
+ /*se repiten actividades con un mismo item.codi, hay que filtrarlas */
+ useEffect(() => {
+  let filteredAct = [
+    ...new Map(actividades.map((item) => [item["codi"], item])).values(),
+  ];
+  setFilteredAct(filteredAct);
+  console.log(filteredAct)
+ }, [actividades]);
 //GEOJSON DATA 
  useEffect(() => {
     let geojsonAgenda = {
       "type": "FeatureCollection",
-      "features": actividades.map(item => {
+      "features": filteredAct.map(item => {
         return {
           "id": item.codi,
           "type": "Feature",
@@ -140,7 +149,8 @@ useEffect(() => {
       geoAgenda,
       geoBiblio,
       geoParques,
-      geoRestaurantes
+      geoRestaurantes, 
+      filteredAct
       }}>
       {children}
     </DataContext.Provider>);

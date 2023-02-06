@@ -4,7 +4,6 @@ import { Route, Routes } from 'react-router-dom';
 import { useState , useEffect} from 'react';
 import Home from './pages/Home';
 import Data from './contexts/Data'
-import List from './components/List';
 import Profile from './pages/Profile';
 import Nav from './components/Nav';
 import Agenda from "./pages/Agenda";

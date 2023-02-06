@@ -9,7 +9,7 @@ import IconYellow from "../assets/icons-map/_restaurant.svg"
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
 const Map = () => {
-  const { actividades, actBiblio, parques, geoAgenda, geoParques, geoBiblio, geoRestaurantes} = useContext(DataContext);
+  const { actividades, actBiblio, parques,filteredAct, geoAgenda, geoParques, geoBiblio, geoRestaurantes} = useContext(DataContext);
   const mapContainer = useRef(null);
   const imageIconLila = new Image();
   imageIconLila.src = IconLila;
