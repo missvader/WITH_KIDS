@@ -11,6 +11,8 @@ import Restaurants from "./pages/Restaurants";
 import AgendaBiblios from "./pages/AgendaBiblios";
 import AreasJoc from "./pages/AreasJoc";
 import Preloader from './components/Preloader';
+import SignupPage from './pages/Signup'
+import LoginPage from './pages/Login'
 function App() {
   const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -26,11 +28,13 @@ function App() {
             <div>
               <Routes>
                 < Route path='/' element = {<Home/>}/>
-                < Route path='/profile' element = {<Profile/>}/>
+                < Route path='/profile1' element = {<Profile/>}/>
                 < Route path='/agendaCultural' element = {<Agenda/>} />
                 < Route path='/restaurants' element = {<Restaurants/>}/>
                 < Route path='/agendaBiblio' element = {<AgendaBiblios/>}/>
                 < Route path='/zonesDeJoc' element = {<AreasJoc/>}/>
+                < Route path="/signup" element={<SignupPage/>} />
+                < Route path="/profile" element={<LoginPage/>} />
               </Routes>  
               <Nav/>
             </div>

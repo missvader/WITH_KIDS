@@ -11,7 +11,7 @@ const Nav = () => {
  
   return (
     <div className="relative">
-    <div className="nav h-1/6 flex flex-col w-full m-auto bg-blanco fixed bottom-0 ">
+    <div className="nav h-1/6 flex flex-col w-full m-auto bg-blanco  bottom-0 ">
       <div className="flex m-auto">
         <NavLink
           to={"./"}
