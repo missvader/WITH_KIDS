@@ -5,8 +5,12 @@ import Restaurant from "../components/Restaurant";
 import "../App.css"
 
 const Restaurants = () => {
-    const { geoRestaurantes}= useContext(DataContext);
+    const { geoRestaurantes, favorites, setFavorites}= useContext(DataContext);
     const dataRest = geoRestaurantes.features;
+    const addFavRest = (dataRest) =>{
+      const newFavList = [...favorites, dataRest];
+      setFavorites(newFavList);
+    }
   return (
     <div className="container ">
             <div>
@@ -14,13 +18,14 @@ const Restaurants = () => {
               dataRest?.map((item, index)=> (
                 <Restaurant
                   key={index}
+                  id={item.properties.id}
                   name={item.properties.name}
                   address = {item.properties.address}
                   phone = {item.properties.phone}
                   web = {item.properties.web}
                   tags = {item.properties.tags}
                   image = {item.properties.image}
-                  
+                  addFavRest={addFavRest}
                 />
               ))
               }

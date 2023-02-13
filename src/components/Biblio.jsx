@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaHeart } from 'react-icons/fa';
+import {useContext } from "react";
+import { DataContext } from "../contexts/DataContext";
 
-const Biblio = ({titol, tags, adreca, data, dies, durada, tipus, publico, imatge, url}) => {
+
+
+const Biblio = ({titol,id, tags, adreca,  data, dies, durada, tipus, publico, imatge, url, addFavActBiblio}) => {
+  
+  
   return (
   <div className="mx-auto bg-lila p-8 ">
     <div className="card lg:card-side bg-base-100 shadow-xl">
@@ -21,7 +27,8 @@ const Biblio = ({titol, tags, adreca, data, dies, durada, tipus, publico, imatge
         </div> 
         
         <div className="card-actions flex justify-between">
-          <button className="  "><FaHeart color="red" size="25px"/></button>
+          <button className="  "
+            onClick={()=>addFavActBiblio(id)}><FaHeart color="red" size="25px"/></button>
           <button 
           className="btn btn-primary btn-xs"
           onClick={() => window.open(url, '_blank')}

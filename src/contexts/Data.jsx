@@ -27,7 +27,7 @@ function Data({children}){
   const [geoBiblio, setGeoBiblio] = useState([]);
   const [geoParques, setGeoParques] = useState([]);
   const [geoRestaurantes, setGeoRestaurantes] = useState([]);
-  
+  const [favorites, setFavorites] = useState([]);
   //GET DATA FROM APIS
   useEffect(() => {
     async function getActivities() {
@@ -61,7 +61,13 @@ function Data({children}){
   setFilteredAct(filteredAct);
   console.log(filteredAct)
  }, [actividades]);
- 
+ //FAVORITES
+ /*const addFavBiblio = (actBiblio) => {
+  const newFavList = [...favorites, actBiblio];
+  setFavorites(newFavList);
+  
+};*/
+
 //GEOJSON DATA 
  useEffect(() => {
     let geojsonAgenda = {
@@ -142,7 +148,15 @@ function Data({children}){
  }, [parques]);
 useEffect(() => {
   setGeoRestaurantes(Restaurants);
-},[]);
+},[]); 
+//-----FAVORITES------------------
+/*function handleFavorite(id) {
+  const newFavoritesBiblio = favorites.map (actBiblio => {
+    return actBiblio.id === id ? {...actBiblio, favorite: !actBiblio.favorite} : actBiblio;
+  });
+  setFavorites(newFavoritesBiblio);
+}*/
+
 	// Retornamos el Provider con el estado que será global con la función que lo actualiza
 	return (
     <DataContext.Provider value={{
@@ -155,7 +169,9 @@ useEffect(() => {
       geoBiblio,
       geoParques,
       geoRestaurantes, 
-      filteredAct
+      filteredAct,
+      favorites,
+      setFavorites,
       }}>
       {children}
     </DataContext.Provider>);

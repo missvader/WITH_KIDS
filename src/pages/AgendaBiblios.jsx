@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {useContext } from "react";
 import { DataContext } from "../contexts/DataContext";
 import Biblio from "../components/Biblio";
 import "../App.css"
 
 const AgendaBiblios = () => {
-  const {actBiblio }= useContext(DataContext)
+  const {actBiblio, favorites, setFavorites }= useContext(DataContext)
+  const addFavActBiblio = (actBiblio) =>{
+    const newFavList = [...favorites, actBiblio];
+    setFavorites(newFavList);
+  }
+  
   return (
     <div className="container ">
             <div>
@@ -13,6 +18,7 @@ const AgendaBiblios = () => {
               actBiblio?.map(item => (
                 <Biblio
                   key={item.acte_id}
+                  id={item.acte_id}
                   titol={item.titol}
                   adreca={item.acte_organitzadors}
                   tags={item.tags[0]}
@@ -23,6 +29,7 @@ const AgendaBiblios = () => {
                   publico={item.public}
                   imatge= {item.imatge}
                   url= {item.acte_url}
+                  addFavActBiblio={addFavActBiblio}
                 />
               ))
               }

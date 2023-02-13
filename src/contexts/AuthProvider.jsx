@@ -5,9 +5,8 @@ import {
   signOut,
   createUserWithEmailAndPassword, 
 } from "firebase/auth";
-import { auth, db } from "../firebase/firebase";
+import { auth} from "../firebase/firebaseConfig";
 import {useNavigate} from 'react-router-dom'
-import {ref, set, onValue} from "firebase/database"
 export const AuthContext = createContext();
 
 export function useAuth() {
@@ -28,21 +27,6 @@ export const AuthProvider = ({ children }) => {
 
   const signup = (username, email, password) => {
     createUserWithEmailAndPassword(auth, username, email, password)
-      /*.then((userCredential) => {
-        set(ref(db,"users/" + userCredential.user.uid), {
-          username: username,
-          email: email,
-          favorites: {}
-        });
-      })
-      .catch((error) =>{console.log(error)
-                        alert(error)});
-      //get users from database and show by console
-      let data = ref(db, 'users/');
-      onValue(data, (snapshot) => {
-      data = snapshot.val();
-      console.log(data);
-      }) */
   }
   
     
@@ -74,6 +58,7 @@ export const AuthProvider = ({ children }) => {
         setError("Usuario ya registrado")
       }
     }
+    console.log(user)
   };
 
   //LOGIN
@@ -100,6 +85,7 @@ export const AuthProvider = ({ children }) => {
   //LOG OUT
   const logout = () => signOut(auth);
   //GUARDAR EN BASE DATOS
+  
   useEffect(() => {
 
   })
@@ -117,7 +103,7 @@ export const AuthProvider = ({ children }) => {
       handleSubmitLogin,
       logout,
       error,
-      user}}
+    }}
     >
       {children}
     </AuthContext.Provider>

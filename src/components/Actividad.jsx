@@ -1,6 +1,6 @@
 import React from "react";
 import { FaHeart } from 'react-icons/fa';
-const Actividad = ({titol, adreca, data,entrades, image, errorImage, url, link}) => {
+const Actividad = ({titol,id, adreca, data,entrades, image, errorImage, url, link, addFavAct}) => {
   const urlImage = `https://agenda.cultura.gencat.cat` + image;
   const urlErrorImage = `https://agenda.cultura.gencat.cat` + errorImage;
   const linkToUrl = link.split(",");
@@ -25,7 +25,8 @@ const Actividad = ({titol, adreca, data,entrades, image, errorImage, url, link})
           <p>{data}</p>  
         </div> 
         <div className="card-actions flex justify-between">
-          <button className="  "><FaHeart color="red" size="25px"/></button>
+          <button className="  " onClick={() => addFavAct(id)}>
+            <FaHeart color="red" size="25px"/></button>
           <button 
           className="btn btn-primary btn-xs "
           ><a

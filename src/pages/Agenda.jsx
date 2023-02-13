@@ -5,7 +5,11 @@ import Actividad from "../components/Actividad";
 import "../App.css"
 
 const Agenda = () => {
-  const {filteredAct }= useContext(DataContext);
+  const {filteredAct, favorites, setFavorites }= useContext(DataContext);
+  const addFavAct = (filteredAct) =>{
+    const newFavList = [...favorites, filteredAct];
+    setFavorites(newFavList);
+  }
   return (
     <div className="container ">
             <div>
@@ -13,6 +17,7 @@ const Agenda = () => {
               filteredAct?.map((item)=> (
                 <Actividad
                   key={item.codi}
+                  id={item.codi}
                   titol={item.denominaci}
                   adreca={item.espai}
                   data={item.data_inici}
@@ -21,6 +26,7 @@ const Agenda = () => {
                   errorImage = {item.imgapp}
                   url={item.url}
                   link={item.enlla_os}
+                  addFavAct={addFavAct}
                 />
               ))
               }
