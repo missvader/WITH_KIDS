@@ -1,7 +1,6 @@
 import React from "react";
+import { FaHeart } from 'react-icons/fa';
 
-import Icon from '@mdi/react';
-import { mdiHeart } from '@mdi/js';
 const Restaurant = ({name, address, web, phone, tags, image}) => {
   return (
     <div className="mx-auto bg-amarillo p-8 ">
@@ -22,7 +21,8 @@ const Restaurant = ({name, address, web, phone, tags, image}) => {
           <p>{phone}</p>
           <p>{tags}</p>  
         </div> 
-        <div className="card-actions justify-end">
+        <div className="card-actions flex justify-between">
+          <button className="  "><FaHeart color="red" size="25px"/></button>
           <button 
           className="btn btn-primary btn-xs"
           onClick={() => window.open(web, '_blank')}

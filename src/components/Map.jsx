@@ -19,8 +19,6 @@ const Map = () => {
   imageIconNaranja.src= IconNaranja;
   const imageIconYellow = new Image();
   imageIconYellow.src = IconYellow;
-
-
   // this is where all of our map logic is going to live
   // adding the empty dependency array ensures that the map
   // is only rendered once
@@ -61,7 +59,7 @@ const Map = () => {
       });
       //LAYERS
       map.addLayer({
-        id: "biblio-circle",
+        id: "biblio",
         type: "symbol",
         source: "biblio",
         layout: {
@@ -71,16 +69,16 @@ const Map = () => {
       });
       
       map.addLayer({
-        id: "unclustered-point",
+        id: "parques",
         type: "symbol",
         source: "parques",
         layout: {
           "icon-image": 'verde',
-          "icon-size": 0.25
-        }
+          "icon-size": 0.25,
+        },
       });
       map.addLayer({
-        id: "actividades-circle",
+        id: "actividades",
         type: "symbol",
         source: "actividades",
         layout: {
@@ -89,7 +87,7 @@ const Map = () => {
         }
       });
       map.addLayer({
-        id: "restaurants-circle",
+        id: "restaurantes",
         type: "symbol",
         source: "restaurantes",
         layout: {
@@ -108,6 +106,36 @@ const Map = () => {
       
       
     })
+    // When a click event occurs on a feature in the places layer, open a popup at the
+// location of the feature, with description HTML from its properties.
+  map.on('click', 'parques', (e) => {
+  // Copy coordinates array.
+  const coordinates = e.features[0].geometry.coordinates.slice();
+  const description = e.features[0].properties.adreca;
+  const barri = e.features[0].properties.barri;
+   
+  // Ensure that if the map is zoomed out such that multiple
+  // copies of the feature are visible, the popup appears
+  // over the copy being pointed to.
+  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+  }
+   
+  new mapboxgl.Popup()
+  .setLngLat(coordinates)
+  .setHTML(`<h3>AREA JOC INFANTIL</h3><p>${description}</p><p>${barri}</p>`)
+  .addTo(map);
+  });
+   
+  // Change the cursor to a pointer when the mouse is over the places layer.
+  map.on('mouseenter', 'parques', () => {
+  map.getCanvas().style.cursor = 'pointer';
+  });
+   
+  // Change it back to a pointer when it leaves.
+  map.on('mouseleave', 'parques', () => {
+  map.getCanvas().style.cursor = '';
+  });
     // cleanup function to remove map on unmount
     return () => map.remove()
   },[])

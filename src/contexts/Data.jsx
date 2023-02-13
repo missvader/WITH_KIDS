@@ -132,6 +132,8 @@ function Data({children}){
         },
         "properties": {
           "id": item._id,
+          "adreca": item.Adreca,
+          "barri" : item.Codi_Barri
         }
       };
     })

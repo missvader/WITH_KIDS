@@ -1,6 +1,6 @@
 import React from "react";
-import Icon from '@mdi/react';
-import { mdiHeart } from '@mdi/js';
+import { FaHeart } from 'react-icons/fa';
+
 const Biblio = ({titol, tags, adreca, data, dies, durada, tipus, publico, imatge, url}) => {
   return (
   <div className="mx-auto bg-lila p-8 ">
@@ -20,7 +20,8 @@ const Biblio = ({titol, tags, adreca, data, dies, durada, tipus, publico, imatge
           <p>{data}</p>  
         </div> 
         
-        <div className="card-actions justify-end">
+        <div className="card-actions flex justify-between">
+          <button className="  "><FaHeart color="red" size="25px"/></button>
           <button 
           className="btn btn-primary btn-xs"
           onClick={() => window.open(url, '_blank')}

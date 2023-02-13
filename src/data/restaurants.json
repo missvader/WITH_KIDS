@@ -98,7 +98,9 @@
         "address": "Carrer Llançà, 1 08015 Barcelona", 
         "phone": 932696047,
         "web": "https://www.restaurantesuarna.com/es/home/",
-        "tags": ["mediterránea", "menu infantil", "zona de juegos"]
+        "tags": ["mediterránea", "menu infantil", "zona de juegos"],
+        "image":"/images/Suarna.jpg"
+
       },
       "geometry": {
         "type": "Point",

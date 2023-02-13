@@ -1,6 +1,5 @@
 import React from "react";
-import Icon from '@mdi/react';
-import { mdiHeart} from '@mdi/js';
+import { FaHeart } from 'react-icons/fa';
 const Actividad = ({titol, adreca, data,entrades, image, errorImage, url, link}) => {
   const urlImage = `https://agenda.cultura.gencat.cat` + image;
   const urlErrorImage = `https://agenda.cultura.gencat.cat` + errorImage;
@@ -10,12 +9,12 @@ const Actividad = ({titol, adreca, data,entrades, image, errorImage, url, link})
    tambien revisar --> Cross-Origin Read Blocking (CORB) ha bloqueado la respuesta de orígenes cruzados <URL> con el tipo de MIME text/html. Consulta la página <URL> para obtener más información. */
   return (
     <div className="mx-auto bg-naranja p-8 ">
-    <div className="card lg:card-side bg-base-100 shadow-xl w-96">
+    <div className="card lg:card-side bg-base-100 shadow-xl">
       <figure className="h-72"><img 
           src={urlImage} 
           alt="agenda activity image"
           onError={(e) => (e.currentTarget.src = urlErrorImage)}
-          className= "w-full"
+          className= "w-full h-72"
       /></figure>
       <div className="card-body">
         <div className="card-title bg-naranja/25 rounded-lg p-2"> 
@@ -25,9 +24,10 @@ const Actividad = ({titol, adreca, data,entrades, image, errorImage, url, link})
           <p>{adreca}</p>
           <p>{data}</p>  
         </div> 
-        <div className="card-actions justify-end">
+        <div className="card-actions flex justify-between">
+          <button className="  "><FaHeart color="red" size="25px"/></button>
           <button 
-          className="btn btn-primary btn-xs"
+          className="btn btn-primary btn-xs "
           ><a
             href={linkToUrl[0]}
             target='_blank'

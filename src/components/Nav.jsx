@@ -10,8 +10,9 @@ import { mdiMapOutline } from '@mdi/js';
 const Nav = () => {
  
   return (
-    <div className="relative">
-    <div className="nav h-1/6 flex flex-col w-full m-auto bg-blanco  bottom-0 ">
+    <div className="">
+    <div className="nav h-1/7 flex flex-col w-full m-auto bg-blanco fixed
+     bottom-0 ">
       <div className="flex m-auto">
         <NavLink
           to={"./"}
@@ -55,14 +56,14 @@ const Nav = () => {
         </i>
         <span className="nav-text text-sm font-bold">BiblioAgenda</span>
       </NavLink>
-      <NavLink 
+      {/*<NavLink 
         to={"./zonesDeJoc"}
         className="nav-item">
         <i className=" icon parc-icon">
           <Icon path={mdiSlide} size={1} />
         </i>
         <span className="nav-text text-sm font-bold">Area joc</span>
-      </NavLink>
+  </NavLink>*/}
       </div>
       
     </div>
