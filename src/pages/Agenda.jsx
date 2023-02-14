@@ -5,10 +5,10 @@ import Actividad from "../components/Actividad";
 import "../App.css"
 
 const Agenda = () => {
-  const {filteredAct, favorites, setFavorites }= useContext(DataContext);
+  const {filteredAct, favoritesAgenda, setFavoritesAgenda }= useContext(DataContext);
   const addFavAct = (filteredAct) =>{
-    const newFavList = [...favorites, filteredAct];
-    setFavorites(newFavList);
+    const newFavList = [...favoritesAgenda, filteredAct];
+    setFavoritesAgenda(newFavList);
   }
   return (
     <div className="container ">

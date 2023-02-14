@@ -1,9 +1,9 @@
 import Logo from '../assets/withKidsLogo.png';
-import { useAuth } from "../contexts/AuthProvider";
 import { NavLink } from "react-router-dom";
-
+import { useAuth } from '../contexts/AuthProvider';
 export default function Login(){
-  const { handleChange, handleSubmitLogin, error } = useAuth();
+  const {setEmail,setPassword, error, login} = useAuth();
+  
   return(
     <div className=" flex flex-col mt-3 md:w-2/3 lg:w-3/5 xl:w-2/5 m-auto" >
         <div className="m-5">
@@ -24,9 +24,9 @@ export default function Login(){
           </NavLink>
           </p>
         </div>
-        <form className="m-4 space-y-6 form flex flex-col justify-center items-center" onSubmit={handleSubmitLogin}>
+        <form className="m-4 space-y-6 form flex flex-col justify-center items-center" onSubmit={login}>
           <input
-            onChange={handleChange}
+            onChange={(e) => setEmail(e.target.value)}
             name="email"
             type="email"
             placeholder="Email"
@@ -38,7 +38,7 @@ export default function Login(){
             }
           />
           <input
-            onChange={handleChange}
+            onChange={(e) => setPassword(e.target.value)}
             name="password"
             type="password"
             placeholder="Password"

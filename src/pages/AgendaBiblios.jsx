@@ -5,10 +5,10 @@ import Biblio from "../components/Biblio";
 import "../App.css"
 
 const AgendaBiblios = () => {
-  const {actBiblio, favorites, setFavorites }= useContext(DataContext)
+  const {actBiblio, favoritesBiblio, setFavoritesBiblio }= useContext(DataContext)
   const addFavActBiblio = (actBiblio) =>{
-    const newFavList = [...favorites, actBiblio];
-    setFavorites(newFavList);
+    const newFavList = [...favoritesBiblio, actBiblio];
+    setFavoritesBiblio(newFavList);
   }
   
   return (

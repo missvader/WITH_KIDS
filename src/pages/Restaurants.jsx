@@ -5,11 +5,11 @@ import Restaurant from "../components/Restaurant";
 import "../App.css"
 
 const Restaurants = () => {
-    const { geoRestaurantes, favorites, setFavorites}= useContext(DataContext);
+    const { geoRestaurantes, favoritesRest, setFavoritesRest}= useContext(DataContext);
     const dataRest = geoRestaurantes.features;
     const addFavRest = (dataRest) =>{
-      const newFavList = [...favorites, dataRest];
-      setFavorites(newFavList);
+      const newFavList = [...favoritesRest, dataRest];
+      setFavoritesRest(newFavList);
     }
   return (
     <div className="container ">

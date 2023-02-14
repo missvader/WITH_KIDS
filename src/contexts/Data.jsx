@@ -27,7 +27,9 @@ function Data({children}){
   const [geoBiblio, setGeoBiblio] = useState([]);
   const [geoParques, setGeoParques] = useState([]);
   const [geoRestaurantes, setGeoRestaurantes] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const [favoritesBiblio, setFavoritesBiblio] = useState([]);
+  const [favoritesAgenda, setFavoritesAgenda] = useState([]);
+  const [favoritesRest, setFavoritesRest] = useState([]);
   //GET DATA FROM APIS
   useEffect(() => {
     async function getActivities() {
@@ -62,10 +64,10 @@ function Data({children}){
   console.log(filteredAct)
  }, [actividades]);
  //FAVORITES
- /*const addFavBiblio = (actBiblio) => {
+ /*
+  const addFavBiblio = (actBiblio) => {
   const newFavList = [...favorites, actBiblio];
   setFavorites(newFavList);
-  
 };*/
 
 //GEOJSON DATA 
@@ -170,8 +172,12 @@ useEffect(() => {
       geoParques,
       geoRestaurantes, 
       filteredAct,
-      favorites,
-      setFavorites,
+      favoritesBiblio,
+      setFavoritesBiblio,
+      favoritesAgenda,
+      setFavoritesAgenda,
+      favoritesRest,
+      setFavoritesRest
       }}>
       {children}
     </DataContext.Provider>);

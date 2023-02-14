@@ -1,110 +1,68 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
-import { 
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut,
-  createUserWithEmailAndPassword, 
-} from "firebase/auth";
-import { auth} from "../firebase/firebaseConfig";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import {useNavigate} from 'react-router-dom'
-export const AuthContext = createContext();
+import firebaseApp from "../firebase/firebase";
+import {
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth"
+const auth = getAuth(firebaseApp);
 
+export const AuthContext = createContext();
 export function useAuth() {
   return useContext(AuthContext);
 }
 
 
 export const AuthProvider = ({ children }) => {
-  const [userData, setUserData] = useState({
-    email:"",
-    password:"",
-    username:"",
-    favorites:{},
-  });
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState("");
+  const [currentUser, setCurrentUser] = useState(null);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
   const navigate= useNavigate();
-
-  const signup = (username, email, password) => {
-    createUserWithEmailAndPassword(auth, username, email, password)
-  }
-  
-    
-  const login = (email, password) => 
-    signInWithEmailAndPassword(auth, email, password);
-
-  const handleChange = ({target: {name, value}}) => {
-    setUserData({...userData, [name]: value});
-  }
   //SIGNUP
-  const handleSubmit = async (e) => {
+  async function register(e){
     e.preventDefault();
-    setError("");
-    try {
-      await signup(userData.email, userData.password, userData.username);
-      navigate("/profile");
-    }catch(error) {
-      console.log("error registro", error);
-      if(error.code === "auth/internal-error"){
-        setError("Los datos no son correctos")
-      }
-      if(error.code === "auth/weak-password"){
-        setError("Contraseña débil, escoge una más larga")
-      }
-      if(error.code === "auth/invalid-email"){
-        setError("Email no válido")
-      }
-      if(error.code === "auth/email-already-in-use"){
-        setError("Usuario ya registrado")
-      }
-    }
-    console.log(user)
-  };
-
-  //LOGIN
-  const handleSubmitLogin = async (e) => {
-    e.preventDefault();
-    setError("");
-    try {
-      await login(userData.email, userData.password);
-      setUserData({email: '', password: ''})
-      navigate("/profile");
-    } catch (error) {
-      console.log("error en login", error);
-      if(error.code === "auth/user-not-found"){
-        setError("Usuario no registrado")
-      }
-      if(error.code === "auth/invalid-email") {
-        setError("Email no válido")
-      }
-      if(error.code === "auth/wrong-password"){
-        setError("Password incorrecto")
-      }
-    }
-  };
-  //LOG OUT
-  const logout = () => signOut(auth);
-  //GUARDAR EN BASE DATOS
+      const user = await createUserWithEmailAndPassword(auth, email, password)
+  }
   
+  //LOGIN
+  async function login(e){
+    e.preventDefault();
+      const user = await signInWithEmailAndPassword(auth, email, password)
+  }
+  //esta funcion de firebase va a estar revisando cada vez que haya un cambio de sesión
   useEffect(() => {
-
-  })
-  // esta función de Firebase nos devuelve la información cada vez que el usuario cambia: abre o cierra sesión, etc
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    onAuthStateChanged(auth, (userFirebase) => {
+      if (userFirebase) {
+        setCurrentUser(userFirebase);
+      } else {
+        setCurrentUser(null);
+      }
     });
-    return () => unsubscribe();
-  }, []);
+    console.log("currentUser -->",currentUser);
+  }, [currentUser]);
+  //SIGNOUT
+  const clickSignOut = () => {signOut(auth)};
   return (
-    <AuthContext.Provider value={{
-      handleChange,
-      handleSubmit,
-      handleSubmitLogin,
-      logout,
+    <AuthContext.Provider value={{ 
+      setEmail,
+      setCurrentUser,
+      setError,
+      setPassword,
+      setUsername,
+      currentUser,
+      email,
+      password,
+      username,
       error,
-    }}
-    >
+      register,
+      login,
+      clickSignOut
+    }}>
       {children}
     </AuthContext.Provider>
   );

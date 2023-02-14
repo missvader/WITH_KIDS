@@ -27,8 +27,9 @@ const Biblio = ({titol,id, tags, adreca,  data, dies, durada, tipus, publico, im
         </div> 
         
         <div className="card-actions flex justify-between">
-          <button className="  "
-            onClick={()=>addFavActBiblio(id)}><FaHeart color="red" size="25px"/></button>
+          <button className=" heart "
+            onClick={()=>addFavActBiblio(id)}>
+              <FaHeart  size="25px" className="heart"color="red"/></button>
           <button 
           className="btn btn-primary btn-xs"
           onClick={() => window.open(url, '_blank')}
