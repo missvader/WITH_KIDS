@@ -1,10 +1,35 @@
 /*.map{
   flex:5;
 }*/
-.mapboxgl-popup-content {
-  max-width: 15rem;
-  font-weight: bold;
-  font-size: small;
+.mapboxgl-popup-content{
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight:bold;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+.parc-popup .mapboxgl-popup-content h3{
+  color: #24CE81;
+  font-size: 18px;
+  padding-bottom: 10px;
+  text-decoration: underline;
+}
+.agenda-popup .mapboxgl-popup-content h3{
+  color: #F48A4C;
+  font-size: 18px;
+  padding-bottom: 10px;
+  text-decoration: underline;
+}
+.biblio-popup .mapboxgl-popup-content h3{
+  color: #9B328B;
+  font-size: 18px;
+  padding-bottom: 10px;
+  text-decoration: underline;
+}
+.rest-popup .mapboxgl-popup-content h3{
+  color: #eab308;
+  font-size: 18px;
+  padding-bottom: 10px;
+  text-decoration: underline;
 }
 .nav{
   /*flex:2;*/

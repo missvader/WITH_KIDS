@@ -1,9 +1,29 @@
+import {useState, useContext} from "react";
 import Logo from '../assets/withKidsLogo.png';
-import { NavLink } from "react-router-dom";
-import { useAuth } from '../contexts/AuthProvider';
+import {NavLink} from "react-router-dom";
+import { AuthContext } from "../contexts/AuthProvider";
+
 export default function Login(){
-  const {setEmail,setPassword, error, login} = useAuth();
-  
+  const {
+    signIn,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    error, 
+    setError
+  } = useContext(AuthContext);
+  /*const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("")*/
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await signIn(email, password);
+    if (res.error) setError(res.error);
+    setEmail("");
+    setPassword("");
+  };
   return(
     <div className=" flex flex-col mt-3 md:w-2/3 lg:w-3/5 xl:w-2/5 m-auto" >
         <div className="m-5">
@@ -24,12 +44,14 @@ export default function Login(){
           </NavLink>
           </p>
         </div>
-        <form className="m-4 space-y-6 form flex flex-col justify-center items-center" onSubmit={login}>
+          {error ? <div>{error}</div> : null}
+        <form className="m-4 space-y-6 form flex flex-col justify-center items-center" onSubmit={handleSubmit} >
           <input
             onChange={(e) => setEmail(e.target.value)}
             name="email"
             type="email"
             placeholder="Email"
+            value={email}
             required
             className={
               error
@@ -42,6 +64,7 @@ export default function Login(){
             name="password"
             type="password"
             placeholder="Password"
+            value={password}
             minLength="6"
             required
             className={

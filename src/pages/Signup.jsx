@@ -1,13 +1,36 @@
-import React , {useState} from "react";
+import {useState, useContext} from "react";
 import {NavLink } from "react-router-dom";
-import Logo from '../assets/withKidsLogo.png'
-import { useAuth } from "../contexts/AuthProvider";
+import { AuthContext } from "../contexts/AuthProvider";
+import Logo from '../assets/withKidsLogo.png';
+
 export default function Signup(){
   
   const {
-    setEmail,setPassword,setUsername, error, register
-  } = useAuth();
-  
+    signUp, 
+    username,
+    setUsername, 
+    password,
+    setPassword,
+    email,
+    setEmail,
+    error, 
+    setError
+  } = useContext(AuthContext);
+  /*const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("")*/
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await signUp(email, password);
+    if(error) {
+      console.log(error)
+    }
+    setEmail("");
+    setPassword("");
+    setUsername("");
+  }
   return(
       <div className=" flex flex-col mt-1 md:w-2/3 lg:w-3/5 xl:w-2/5 m-auto" >
         <div className="m-5">
@@ -28,10 +51,11 @@ export default function Signup(){
           </NavLink>
           </p>
         </div>
-        <form className="m-4 space-y-6 form flex flex-col justify-center items-center" onSubmit={register}>
+        <form className="m-4 space-y-6 form flex flex-col justify-center items-center" onSubmit={handleSubmit}>
           <input
             onChange={(e) => setUsername(e.target.value)}
             name="username"
+            value={username}
             type="text"
             placeholder="Username"
             required
@@ -46,6 +70,7 @@ export default function Signup(){
             name="email"
             type="email"
             placeholder="Email"
+            value={email}
             required
             className={
               error
@@ -58,6 +83,7 @@ export default function Signup(){
             name="password"
             type="password"
             placeholder="Password"
+            value={password}
             minLength="6"
             required
             className={

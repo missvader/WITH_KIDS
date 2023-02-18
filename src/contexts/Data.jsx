@@ -9,9 +9,11 @@ const agenda = axios.create({
 const biblio = axios.create({
   baseURL: "https://do.diba.cat/api/dataset/actesbiblioteques_ca/format/json/pag-ini/1/pag-fi/29999/camp-categoria-like/infants/camp-rel_municipis-like/08019/"
 })
-const parc = axios.create({
+/*const parc = axios.create({
   baseURL: "https://opendata-ajuntament.barcelona.cat/data/api/action/datastore_search?limit=500&resource_id=5a331131-fecb-40dc-89ce-d8d6e680cf80"
-})
+})*/
+const parcURL = "https://opendata-ajuntament.barcelona.cat/data/api/action/datastore_search?limit=500&resource_id=5a331131-fecb-40dc-89ce-d8d6e680cf80"
+const opendataTOKEN = "f3897e857c53d35c3ca1e3a4838476b7df5d7edcfdf806a57d2b814e58436edc" ;
 function Data({children}){
   const initialState = {
     isLoading : true,
@@ -34,6 +36,7 @@ function Data({children}){
   useEffect(() => {
     async function getActivities() {
       const response = await agenda.get();
+      
       setActividades(response.data);
     }
     getActivities();
@@ -47,13 +50,31 @@ function Data({children}){
     getActBiblio();
     console.log()
   }, []); 
-  useEffect(() => {
+  /*useEffect(() => {
     async function getParques() {
       const response = await parc.get();
       setParques(response.data.result.records);
     }
     getParques();
-  }, []); 
+  }, []); */
+  /*useEffect(()=> {
+    async function getParques() {
+       const config = {
+        headers: {
+          'Host': "opendata-ajuntament.barcelona.cat",
+          'Accept': "application/json",
+          'Authorization': opendataTOKEN,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type,Accept',
+          'Access-Control-Allow-Credentials': 'true',
+
+        }
+       }
+      const response= await axios.get(parcURL, config)
+        setParques(response.data.result.records);
+    }
+    getParques();
+  }, [])*/
  //FILTERED ACTIVITIES
  /*se repiten actividades con un mismo item.codi, hay que filtrarlas */
  useEffect(() => {
@@ -86,10 +107,12 @@ function Data({children}){
               ]
           },
           "properties": {
-             "titol": item.denominac,
+             "titol": item.denominaci,
+             "descripcio":item.descripcio,
              "espai": item.espai,
              "inici": item.data_inici,
              "fi": item.data_fi,
+             "tags": item.tags_mbits
           }
         };
       })
@@ -124,7 +147,7 @@ function Data({children}){
    };
    setGeoBiblio(geojsonBiblio);
  }, [actBiblio]);
- useEffect(() => {
+ /*useEffect(() => {
   let geojsonParques = {
     "type": "FeatureCollection",
     "features": parques.map(item => {
@@ -147,7 +170,7 @@ function Data({children}){
     })
   };
   setGeoParques(geojsonParques);
- }, [parques]);
+ }, [parques]);*/
 useEffect(() => {
   setGeoRestaurantes(Restaurants);
 },[]); 
@@ -164,12 +187,12 @@ useEffect(() => {
     <DataContext.Provider value={{
       actividades,
       actBiblio,
-      parques,
+      /*parques,*/
       isLoading: true,
       userLocation: undefined,
       geoAgenda,
       geoBiblio,
-      geoParques,
+      /*geoParques,*/
       geoRestaurantes, 
       filteredAct,
       favoritesBiblio,

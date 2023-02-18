@@ -2,14 +2,31 @@ import React from "react";
 import {useContext } from "react";
 import { DataContext } from "../contexts/DataContext";
 import Actividad from "../components/Actividad";
-import "../App.css"
+import { addDoc, collection, } from "firebase/firestore";
+import { db} from "../firebase/firebase";
 
+import "../App.css"
 const Agenda = () => {
-  const {filteredAct, favoritesAgenda, setFavoritesAgenda }= useContext(DataContext);
-  const addFavAct = (filteredAct) =>{
+  const {filteredAct,currentUser,  favoritesAgenda, setFavoritesAgenda }= useContext(DataContext);
+  /*const addFavAct = (filteredAct) =>{
     const newFavList = [...favoritesAgenda, filteredAct];
     setFavoritesAgenda(newFavList);
-  }
+  }*/
+  
+  const addFavAgenda = (userId, filteredAct) => {
+    
+    
+    const userRef = collection('users').doc(userId);
+    const favoritesRef = userRef.collection('favoritesAgenda');
+
+    favoritesRef.add(filteredAct)
+      .then((docRef) => {
+        console.log('New fav added with Id: ', docRef.id);
+      })
+      .catch((error) => {
+        console.error('Error adding fav: ', error)
+      })
+  };
   return (
     <div className="container ">
             <div>
@@ -26,7 +43,7 @@ const Agenda = () => {
                   errorImage = {item.imgapp}
                   url={item.url}
                   link={item.enlla_os}
-                  addFavAct={addFavAct}
+                  addFavAct={addFavAgenda}
                 />
               ))
               }

@@ -15,13 +15,14 @@ import Signup from './pages/Signup'
 import Login from './pages/Login';
 import PrivateRoute from './Routes/PrivateRoute';
 import { AuthProvider } from './contexts/AuthProvider';
+
 function App() {
   const [loading, setLoading] = useState(true);
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
         }, 5000);
-    }, []);
+    },[]);
   return (
     <AuthProvider>
       <Data>
@@ -32,9 +33,10 @@ function App() {
                 <Routes>
                   < Route path='/' element = {<Home/>}/>
                   < Route path='/profile' element = {
-                    <PrivateRoute>
-                      <Profile/>
-                    </PrivateRoute>}/>
+                      <PrivateRoute>
+                        <Profile />
+                      </PrivateRoute>
+                    }/>
                   < Route path='/agendaCultural' element = {<Agenda/>} />
                   < Route path='/restaurants' element = {<Restaurants/>}/>
                   < Route path='/agendaBiblio' element = {<AgendaBiblios/>}/>

@@ -1,67 +1,109 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom'
-import firebaseApp from "../firebase/firebase";
+import { createContext,useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
-  getAuth, 
   createUserWithEmailAndPassword, 
+  updateProfile,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-} from "firebase/auth"
-const auth = getAuth(firebaseApp);
+} from "firebase/auth";
+import { addDoc, collection, setDoc, doc} from "firebase/firestore";
+import {auth, db} from "../firebase/firebase";
 
 export const AuthContext = createContext();
-export function useAuth() {
-  return useContext(AuthContext);
-}
-
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState()
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
   const navigate= useNavigate();
   //SIGNUP
-  async function register(e){
-    e.preventDefault();
-      const user = await createUserWithEmailAndPassword(auth, email, password)
-  }
+  const signUp = async(email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      updateProfile(auth.currentUser, {
+        displayName:username
+      });
+      const user = userCredential.user;
+      console.log('user -> ', user)
+      sessionStorage.setItem('Auth Token', user.stsTokenManager.refreshToken)
+      /*console.log(user)*/
+      await setDoc(doc(db, 'users', user.uid), {
+        email, 
+        username
+      });
+      navigate('/profile')
+      return true
+    }catch(error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if(errorCode == 'auth/weak-password'){
+        alert('Password is too weak');
+      }else {
+        alert(errorMessage);
+      }
+      console.log(error)
+    }
+  };
+  
   
   //LOGIN
-  async function login(e){
-    e.preventDefault();
-      const user = await signInWithEmailAndPassword(auth, email, password)
-  }
+  const signIn = async (email, password) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      sessionStorage.setItem('Auth Token', user.stsTokenManager.refreshToken)
+      navigate('/profile');
+      return true
+    } catch(error) {
+      return {
+        error: error.message}
+    }
+  };
+  //SIGNOUT
+  const logOut = async() => {
+    try {
+      await signOut(auth)
+      navigate('/')
+      return true
+    }catch(error) {return false}
+  };
   //esta funcion de firebase va a estar revisando cada vez que haya un cambio de sesión
   useEffect(() => {
-    onAuthStateChanged(auth, (userFirebase) => {
-      if (userFirebase) {
-        setCurrentUser(userFirebase);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("state=signed in")
+        setCurrentUser(user);
       } else {
+        console.log("state=signed out")
         setCurrentUser(null);
       }
     });
-    console.log("currentUser -->",currentUser);
-  }, [currentUser]);
-  //SIGNOUT
-  const clickSignOut = () => {signOut(auth)};
+    console.log('currentUser es=>',currentUser)
+  },[currentUser]);
+  
+  
   return (
     <AuthContext.Provider value={{ 
-      setEmail,
-      setCurrentUser,
-      setError,
-      setPassword,
-      setUsername,
       currentUser,
-      email,
-      password,
-      username,
-      error,
-      register,
-      login,
-      clickSignOut
+      setCurrentUser,
+      signIn,
+      signUp,
+      logOut,
+      email, setEmail,
+      username, setUsername,
+      password,setPassword,
+      error, setError
     }}>
       {children}
     </AuthContext.Provider>

@@ -13,8 +13,6 @@ const Map = () => {
   const mapContainer = useRef(null);
   const imageIconLila = new Image();
   imageIconLila.src = IconLila;
-  const imageIconVerde = new Image();
-  imageIconVerde.src = IconVerde;
   const imageIconNaranja = new Image();
   imageIconNaranja.src= IconNaranja;
   const imageIconYellow = new Image();
@@ -25,7 +23,7 @@ const Map = () => {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/mapbox/light-v11",
+      style: "mapbox://styles/missvader/cle6y069y000r01qw92ghrlkr",
       center: [2.15899, 41.38879],
       zoom: 11.5,
       
@@ -34,20 +32,12 @@ const Map = () => {
     map.on("load", () => {
       map.addImage('lila', imageIconLila);
       map.addImage("naranja", imageIconNaranja );
-      map.addImage("verde", imageIconVerde);
+      /*map.addImage("verde", imageIconVerde);*/
       map.addImage("amarillo", imageIconYellow);
       //SOURCES
       map.addSource("biblio", {
         type: "geojson",
         data: geoBiblio
-      });
-      map.addSource("parques", {
-        type: "geojson",
-        data: geoParques,
-        cluster: true,
-        clusterMaxZoom: 15,
-        clusterRadius:10,
-        
       });
       map.addSource("actividades", {
         type: "geojson",
@@ -64,18 +54,8 @@ const Map = () => {
         source: "biblio",
         layout: {
           "icon-image": 'lila',
-          "icon-size": 0.25
+          "icon-size": 0.20
         }
-      });
-      
-      map.addLayer({
-        id: "parques",
-        type: "symbol",
-        source: "parques",
-        layout: {
-          "icon-image": 'verde',
-          "icon-size": 0.25,
-        },
       });
       map.addLayer({
         id: "actividades",
@@ -83,7 +63,7 @@ const Map = () => {
         source: "actividades",
         layout: {
           "icon-image": 'naranja',
-          "icon-size": 0.25
+          "icon-size": 0.20
         }
       });
       map.addLayer({
@@ -92,7 +72,7 @@ const Map = () => {
         source: "restaurantes",
         layout: {
           "icon-image": 'amarillo',
-          "icon-size": 0.25
+          "icon-size": 0.20
         }
       });
       //GEOLOCATION
@@ -106,37 +86,79 @@ const Map = () => {
       
       
     })
-    // When a click event occurs on a feature in the places layer, open a popup at the
-// location of the feature, with description HTML from its properties.
-  map.on('click', 'parques', (e) => {
-  // Copy coordinates array.
-  const coordinates = e.features[0].geometry.coordinates.slice();
-  const description = e.features[0].properties.adreca;
-  const barri = e.features[0].properties.barri;
-   
-  // Ensure that if the map is zoomed out such that multiple
-  // copies of the feature are visible, the popup appears
-  // over the copy being pointed to.
-  while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-  coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-  }
-   
-  new mapboxgl.Popup()
-  .setLngLat(coordinates)
-  .setHTML(`<h3>AREA JOC INFANTIL</h3><p>${description}</p><p>${barri}</p>`)
-  .addTo(map);
+    //---POPUPS PARCS--------------- 
+    map.on('click', (event) => {
+      const features = map.queryRenderedFeatures(event.point, {
+      layers: ['parcsbcn'] 
+      });
+      if (!features.length) {
+      return;
+      }
+      const feature = features[0];
+      const popup1 = new mapboxgl.Popup({ offset: [0, -15] , className:"parc-popup"})
+      .setLngLat(feature.geometry.coordinates)
+      .setHTML(
+      `<h3>AREA JOC INFANTIL</h3><p>ADREÇA: ${feature.properties.Adreca}</p><p>BARRI: ${feature.properties.Codi_Barri}</p><p>DISTRICTE: ${feature.properties.Codi_Districte}</p>`
+      )
+      .addTo(map);
+    });
+    //---POPUPS AGENDA--------
+    map.on('click',(e) => {
+      const features = map.queryRenderedFeatures(e.point, {
+      layers: ['actividades'] 
+      });
+      if (!features.length) {
+      return;
+      }
+      const feature = features[0];
+      const popup2 = new mapboxgl.Popup({ offset: [0, -15] , className:"agenda-popup"})
+      .setLngLat(feature.geometry.coordinates)
+      .setHTML(
+      `<h3>${feature.properties.titol}</h3><p>ESPAI: ${feature.properties.espai}</p><p>INICI: ${feature.properties.inici}/FI: ${feature.properties.fi}</p><p>${feature.properties.tags}</p>`
+      )
+      .addTo(map);
+    });
+    //----POPUPS BIBLIO-------
+    map.on('click',(e) => {
+      const features = map.queryRenderedFeatures(e.point, {
+      layers: ['biblio'] 
+      });
+      if (!features.length) {
+      return;
+      }
+      const feature = features[0];
+      const popup2 = new mapboxgl.Popup({ offset: [0, -15] , className:"biblio-popup"})
+      .setLngLat(feature.geometry.coordinates)
+      .setHTML(
+      `<h3>${feature.properties.titol}</h3><p>ESPAI: ${feature.properties.organitzadors}</p><p>INICI: ${feature.properties.inici}/FI: ${feature.properties.fi}</p><p>${feature.properties.dies}</p>`
+      )
+      .addTo(map);
+    });
+    //---POPUPS RESTAURANTS----------
+    map.on('click',(e) => {
+      const features = map.queryRenderedFeatures(e.point, {
+      layers: ['restaurantes'] 
+      });
+      if (!features.length) {
+      return;
+      }
+      const feature = features[0];
+      const popup2 = new mapboxgl.Popup({ offset: [0, -15] , className:"rest-popup"})
+      .setLngLat(feature.geometry.coordinates)
+      .setHTML(
+      `<h3>${feature.properties.name}</h3><p>${feature.properties.address}</p>`
+      )
+      .addTo(map);
+    });
+    // Change the cursor to a pointer when the mouse is over the places layer.
+  /*map.on('mouseenter','parcsbcn',() => {
+    map.getCanvas().style.cursor = 'pointer';
   });
-   
-  // Change the cursor to a pointer when the mouse is over the places layer.
-  map.on('mouseenter', 'parques', () => {
-  map.getCanvas().style.cursor = 'pointer';
-  });
-   
   // Change it back to a pointer when it leaves.
-  map.on('mouseleave', 'parques', () => {
-  map.getCanvas().style.cursor = '';
-  });
-    // cleanup function to remove map on unmount
+  map.on('mouseleave','parcsbcn',() => {
+    map.getCanvas().style.cursor = '';
+  });*/
+  // cleanup function to remove map on unmount
     return () => map.remove()
   },[])
   return (
