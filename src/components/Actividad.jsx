@@ -1,12 +1,36 @@
-import React from "react";
+import React, {useState, useContext} from "react";
 import { FaHeart } from 'react-icons/fa';
-const Actividad = ({titol,id, adreca, data,entrades, image, errorImage, url, link, addFavAct}) => {
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import {db} from "../firebase/firebase";
+import { AuthContext } from "../contexts/AuthProvider";
+
+const Actividad = ({titol,id, adreca, data, image, errorImage, url, link, addFavAct}) => {
   const urlImage = `https://agenda.cultura.gencat.cat` + image;
   const urlErrorImage = `https://agenda.cultura.gencat.cat` + errorImage;
   const linkToUrl = link.split(",");
   /* ------- ESTOS ERRORES Y WARNINGS SON POR LAS urlIMAGES--------------------------
   Revisar error de chrome -->  indicate wheter to send a cookie in a cross-site request by     specifying its SameSite attribute
    tambien revisar --> Cross-Origin Read Blocking (CORB) ha bloqueado la respuesta de orígenes cruzados <URL> con el tipo de MIME text/html. Consulta la página <URL> para obtener más información. */
+  const {currentUser} = useContext(AuthContext);
+  const [like, setLike] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  const addFavoriteAgenda = async () => {
+    if(currentUser !== null){
+      const favAgendaID = doc(db, 'users', `${currentUser.uid}`)
+      setLike(!like)
+      setSaved(!saved)
+      await updateDoc(favAgendaID, {
+        favoritesAgenda: arrayUnion({
+          id:id,
+          titol: titol
+        })
+      })
+    }else{
+      alert('Inicia sesión para guardar favoritos')
+    }
+  }
+
   return (
     <div className="mx-auto bg-naranja p-8 ">
     <div className="card lg:card-side bg-base-100 shadow-xl">
@@ -25,8 +49,12 @@ const Actividad = ({titol,id, adreca, data,entrades, image, errorImage, url, lin
           <p>{data}</p>  
         </div> 
         <div className="card-actions flex justify-between">
-          <button className="  " onClick={() => addFavAct(id)}>
-            <FaHeart color="red" size="25px"/></button>
+          <button onClick={addFavoriteAgenda}>
+            {like ? 
+              <FaHeart color="red" size="25px"/> :
+              <FaHeart size="25px"/>
+            }
+          </button>
           <button 
           className="btn btn-primary btn-xs "
           ><a

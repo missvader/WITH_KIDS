@@ -1,4 +1,4 @@
-import {useState, useContext} from "react";
+import {useState, useContext, useEffect} from "react";
 import {NavLink } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import Logo from '../assets/withKidsLogo.png';

@@ -7,7 +7,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
-import { addDoc, collection, setDoc, doc} from "firebase/firestore";
+import {  setDoc, doc} from "firebase/firestore";
 import {auth, db} from "../firebase/firebase";
 
 export const AuthContext = createContext();
@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
+  
   const navigate= useNavigate();
   //SIGNUP
   const signUp = async(email, password) => {
@@ -28,15 +29,17 @@ export const AuthProvider = ({ children }) => {
         password,
       );
       updateProfile(auth.currentUser, {
-        displayName:username
+        displayName:username,
       });
       const user = userCredential.user;
       console.log('user -> ', user)
       sessionStorage.setItem('Auth Token', user.stsTokenManager.refreshToken)
-      /*console.log(user)*/
       await setDoc(doc(db, 'users', user.uid), {
         email, 
-        username
+        username,
+        favoritesBiblio: [],
+        favoritesAgenda: [],
+        favoritesRestaurants:[]
       });
       navigate('/profile')
       return true
@@ -81,9 +84,11 @@ export const AuthProvider = ({ children }) => {
   //esta funcion de firebase va a estar revisando cada vez que haya un cambio de sesión
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      console.log('loading...')
       if (user) {
         console.log("state=signed in")
         setCurrentUser(user);
+        
       } else {
         console.log("state=signed out")
         setCurrentUser(null);

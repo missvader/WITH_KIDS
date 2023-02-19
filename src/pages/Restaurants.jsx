@@ -1,16 +1,13 @@
 import React from "react";
-import {useContext } from "react";
+import {useContext , useState, useEffect} from "react";
 import { DataContext } from "../contexts/DataContext";
 import Restaurant from "../components/Restaurant";
 import "../App.css"
 
 const Restaurants = () => {
-    const { geoRestaurantes, favoritesRest, setFavoritesRest}= useContext(DataContext);
+    const { geoRestaurantes}= useContext(DataContext);
     const dataRest = geoRestaurantes.features;
-    const addFavRest = (dataRest) =>{
-      const newFavList = [...favoritesRest, dataRest];
-      setFavoritesRest(newFavList);
-    }
+  
   return (
     <div className="container ">
             <div>
@@ -25,7 +22,6 @@ const Restaurants = () => {
                   web = {item.properties.web}
                   tags = {item.properties.tags}
                   image = {item.properties.image}
-                  addFavRest={addFavRest}
                 />
               ))
               }

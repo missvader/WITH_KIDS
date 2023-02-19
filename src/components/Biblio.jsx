@@ -1,13 +1,31 @@
-import React, { useEffect } from "react";
+import React, {useState, useContext} from "react";
 import { FaHeart } from 'react-icons/fa';
-import {useContext } from "react";
-import { DataContext } from "../contexts/DataContext";
-
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import {db} from "../firebase/firebase";
+import { AuthContext } from "../contexts/AuthProvider";
 
 
 const Biblio = ({titol,id, tags, adreca,  data, dies, durada, tipus, publico, imatge, url, addFavActBiblio}) => {
+  const {currentUser} = useContext(AuthContext);
+  const [like, setLike] = useState(false);
+  const [saved, setSaved] = useState(false);
   
-  
+  const addFavoriteBiblio = async () => {
+    if(currentUser !== null){
+      const favBiblioID = doc(db, 'users', `${currentUser.uid}`)
+      setLike(!like)
+      setSaved(!saved)
+      await updateDoc(favBiblioID, {
+          favoritesBiblio: arrayUnion({
+          id:id,
+          titol: titol
+        })
+      })
+    }else{
+      alert('Inicia sesión para guardar favoritos')
+    }
+  }
+
   return (
   <div className="mx-auto bg-lila p-8 ">
     <div className="card lg:card-side bg-base-100 shadow-xl">
@@ -28,8 +46,12 @@ const Biblio = ({titol,id, tags, adreca,  data, dies, durada, tipus, publico, im
         
         <div className="card-actions flex justify-between">
           <button className=" heart "
-            onClick={()=>addFavActBiblio(id)}>
-              <FaHeart  size="25px" className="heart"color="red"/></button>
+            onClick={addFavoriteBiblio}>
+              {like ? 
+              <FaHeart color="red" size="25px"/> :
+              <FaHeart size="25px"/>
+              }
+          </button>
           <button 
           className="btn btn-primary btn-xs"
           onClick={() => window.open(url, '_blank')}

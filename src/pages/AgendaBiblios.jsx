@@ -1,15 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 import {useContext } from "react";
 import { DataContext } from "../contexts/DataContext";
 import Biblio from "../components/Biblio";
 import "../App.css"
 
 const AgendaBiblios = () => {
-  const {actBiblio, favoritesBiblio, setFavoritesBiblio }= useContext(DataContext)
-  const addFavActBiblio = (actBiblio) =>{
-    const newFavList = [...favoritesBiblio, actBiblio];
-    setFavoritesBiblio(newFavList);
+  const {actBiblio }= useContext(DataContext)
+  const [favBiblio, setFavBiblio] = useState([])
+  const addFavBiblio = (actBiblio) =>{
+    const newFavList = [ actBiblio];
+    setFavBiblio(newFavList);
   }
+  console.log("favBiblio",favBiblio )
   
   return (
     <div className="container ">
@@ -29,7 +31,7 @@ const AgendaBiblios = () => {
                   publico={item.public}
                   imatge= {item.imatge}
                   url= {item.acte_url}
-                  addFavActBiblio={addFavActBiblio}
+                  addFavActBiblio={addFavBiblio}
                 />
               ))
               }

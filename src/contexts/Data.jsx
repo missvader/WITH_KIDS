@@ -9,11 +9,6 @@ const agenda = axios.create({
 const biblio = axios.create({
   baseURL: "https://do.diba.cat/api/dataset/actesbiblioteques_ca/format/json/pag-ini/1/pag-fi/29999/camp-categoria-like/infants/camp-rel_municipis-like/08019/"
 })
-/*const parc = axios.create({
-  baseURL: "https://opendata-ajuntament.barcelona.cat/data/api/action/datastore_search?limit=500&resource_id=5a331131-fecb-40dc-89ce-d8d6e680cf80"
-})*/
-const parcURL = "https://opendata-ajuntament.barcelona.cat/data/api/action/datastore_search?limit=500&resource_id=5a331131-fecb-40dc-89ce-d8d6e680cf80"
-const opendataTOKEN = "f3897e857c53d35c3ca1e3a4838476b7df5d7edcfdf806a57d2b814e58436edc" ;
 function Data({children}){
   const initialState = {
     isLoading : true,
@@ -21,17 +16,13 @@ function Data({children}){
   }
 
 	//DATA STATES
-  const [parques, setParques] = useState([]);
   const [actividades, setActividades] = useState([]);
   const [filteredAct, setFilteredAct] = useState([]);
   const [actBiblio, setActBiblio] = useState([]);
   const [geoAgenda, setGeoAgenda] = useState([]);
   const [geoBiblio, setGeoBiblio] = useState([]);
-  const [geoParques, setGeoParques] = useState([]);
   const [geoRestaurantes, setGeoRestaurantes] = useState([]);
-  const [favoritesBiblio, setFavoritesBiblio] = useState([]);
-  const [favoritesAgenda, setFavoritesAgenda] = useState([]);
-  const [favoritesRest, setFavoritesRest] = useState([]);
+  
   //GET DATA FROM APIS
   useEffect(() => {
     async function getActivities() {
@@ -50,31 +41,7 @@ function Data({children}){
     getActBiblio();
     console.log()
   }, []); 
-  /*useEffect(() => {
-    async function getParques() {
-      const response = await parc.get();
-      setParques(response.data.result.records);
-    }
-    getParques();
-  }, []); */
-  /*useEffect(()=> {
-    async function getParques() {
-       const config = {
-        headers: {
-          'Host': "opendata-ajuntament.barcelona.cat",
-          'Accept': "application/json",
-          'Authorization': opendataTOKEN,
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type,Accept',
-          'Access-Control-Allow-Credentials': 'true',
-
-        }
-       }
-      const response= await axios.get(parcURL, config)
-        setParques(response.data.result.records);
-    }
-    getParques();
-  }, [])*/
+  
  //FILTERED ACTIVITIES
  /*se repiten actividades con un mismo item.codi, hay que filtrarlas */
  useEffect(() => {
@@ -84,12 +51,6 @@ function Data({children}){
   setFilteredAct(filteredAct);
   console.log(filteredAct)
  }, [actividades]);
- //FAVORITES
- /*
-  const addFavBiblio = (actBiblio) => {
-  const newFavList = [...favorites, actBiblio];
-  setFavorites(newFavList);
-};*/
 
 //GEOJSON DATA 
  useEffect(() => {
@@ -147,60 +108,22 @@ function Data({children}){
    };
    setGeoBiblio(geojsonBiblio);
  }, [actBiblio]);
- /*useEffect(() => {
-  let geojsonParques = {
-    "type": "FeatureCollection",
-    "features": parques.map(item => {
-      return {
-        "id": item._id,
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            parseFloat(item.Longitud),
-            parseFloat(item.Latitud)
-          ]
-        },
-        "properties": {
-          "id": item._id,
-          "adreca": item.Adreca,
-          "barri" : item.Codi_Barri
-        }
-      };
-    })
-  };
-  setGeoParques(geojsonParques);
- }, [parques]);*/
+ 
 useEffect(() => {
   setGeoRestaurantes(Restaurants);
 },[]); 
-//-----FAVORITES------------------
-/*function handleFavorite(id) {
-  const newFavoritesBiblio = favorites.map (actBiblio => {
-    return actBiblio.id === id ? {...actBiblio, favorite: !actBiblio.favorite} : actBiblio;
-  });
-  setFavorites(newFavoritesBiblio);
-}*/
 
 	// Retornamos el Provider con el estado que será global con la función que lo actualiza
 	return (
     <DataContext.Provider value={{
       actividades,
       actBiblio,
-      /*parques,*/
       isLoading: true,
       userLocation: undefined,
       geoAgenda,
       geoBiblio,
-      /*geoParques,*/
       geoRestaurantes, 
       filteredAct,
-      favoritesBiblio,
-      setFavoritesBiblio,
-      favoritesAgenda,
-      setFavoritesAgenda,
-      favoritesRest,
-      setFavoritesRest
       }}>
       {children}
     </DataContext.Provider>);
