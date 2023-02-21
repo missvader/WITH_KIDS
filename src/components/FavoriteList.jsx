@@ -1,13 +1,15 @@
-import React from "react"
-import {useContext } from "react";
-import { DataContext } from "../contexts/DataContext";
+import React from "react";
+import FavoritesAgenda from "./FavoritesAgenda";
+import FavoritesBiblio from "./FavoritesBiblio";
+import FavoritesRest from "./FavoritesRest";
+
 const FavoriteList = () => {
-  
-  const {actBiblio, favoritesBiblio,filteredAct, favoritesAgenda,geoRestaurantes, favoritesRest }= useContext(DataContext)
-//Hacer una favoriteList para cada una de las listas de favoritos???????
+  /*Aqui va la logica de los 3 botones que renderizaran cada uno de los componentes de favoritos, pendiente tambien hacer los 3 botones  */
   return (
     <div>
-      FAVORITE LIST
+        <FavoritesAgenda/>
+        <FavoritesBiblio/>
+        <FavoritesRest/>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React , {useState, useContext} from "react";
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
-import { FaHeart} from 'react-icons/fa';
+import { FaHeart, FaRegHeart} from 'react-icons/fa';
 import { AuthContext } from "../contexts/AuthProvider"; 
 import { db } from "../firebase/firebase";
 
@@ -48,7 +48,7 @@ const Restaurant = ({name, address, web, phone, tags, image,id}) => {
           <button className="  " onClick={addFavoriteRest}>
             {like ? 
               <FaHeart color="red" size="25px"/> :
-              <FaHeart size="25px"/>
+              <FaRegHeart size="25px"/>
             }
           </button>
           <button 

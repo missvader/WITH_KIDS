@@ -3,6 +3,7 @@ import axios from "axios";
 import { DataContext } from "./DataContext";
 import Restaurants from "../data/restaurants.json";
 
+
 const agenda = axios.create({
   baseURL:"https://analisi.transparenciacatalunya.cat/resource/rhpv-yr4f.json?$query=SELECT%0A%20%20%60codi%60%2C%0A%20%20%60data_fi%60%2C%0A%20%20%60data_inici%60%2C%0A%20%20%60data_fi_aproximada%60%2C%0A%20%20%60denominaci%60%2C%0A%20%20%60descripcio%60%2C%0A%20%20%60entrades%60%2C%0A%20%20%60horari%60%2C%0A%20%20%60subt_tol%60%2C%0A%20%20%60tags_mbits%60%2C%0A%20%20%60tags_categor_es%60%2C%0A%20%20%60tags_altres_categor_es%60%2C%0A%20%20%60enlla_os%60%2C%0A%20%20%60documents%60%2C%0A%20%20%60imatges%60%2C%0A%20%20%60v_deos%60%2C%0A%20%20%60adre_a%60%2C%0A%20%20%60codi_postal%60%2C%0A%20%20%60comarca_i_municipi%60%2C%0A%20%20%60email%60%2C%0A%20%20%60espai%60%2C%0A%20%20%60latitud%60%2C%0A%20%20%60localitat%60%2C%0A%20%20%60longitud%60%2C%0A%20%20%60regi_o_pa_s%60%2C%0A%20%20%60tel_fon%60%2C%0A%20%20%60url%60%2C%0A%20%20%60imgapp%60%2C%0A%20%20%60descripcio_html%60%0AWHERE%0A%20%20(%60comarca_i_municipi%60%0A%20%20%20%20%20%3D%20'agenda%3Aubicacions%2Fbarcelona%2Fbarcelones%2Fbarcelona')%0A%20%20AND%20(contains(%60tags_categor_es%60%2C%20'agenda%3Acategories%2Finfantil')%0A%20%20%20%20%20%20%20%20%20AND%20(%60data_fi%60%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20BETWEEN%20'2023-01-24T11%3A45%3A57'%20%3A%3A%20floating_timestamp%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20AND%20'2023-12-19T11%3A45%3A57'%20%3A%3A%20floating_timestamp))"
 });
@@ -22,7 +23,9 @@ function Data({children}){
   const [geoAgenda, setGeoAgenda] = useState([]);
   const [geoBiblio, setGeoBiblio] = useState([]);
   const [geoRestaurantes, setGeoRestaurantes] = useState([]);
-  
+  /*const [favRest, setFavRest] = useState([]);
+  const [favBiblio, setFavBiblio] = useState([]);
+  const [favAgenda, setFavAgenda] = useState([]);*/
   //GET DATA FROM APIS
   useEffect(() => {
     async function getActivities() {
@@ -112,7 +115,9 @@ function Data({children}){
 useEffect(() => {
   setGeoRestaurantes(Restaurants);
 },[]); 
-
+/*GUARDAR FAVORITOS */
+/*OBTENER LOS FAVORITOS*/
+/*BORRAR FAVORITOS  */
 	// Retornamos el Provider con el estado que será global con la función que lo actualiza
 	return (
     <DataContext.Provider value={{

@@ -1,5 +1,6 @@
 import { createContext,useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { successLoginSignUp , msgError, logOutMsg} from '../firebase/messages'
 import {
   createUserWithEmailAndPassword, 
   updateProfile,
@@ -28,9 +29,11 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       );
+      console.log("userCredential", userCredential)
       updateProfile(auth.currentUser, {
         displayName:username,
       });
+      successLoginSignUp('Registro completado')
       const user = userCredential.user;
       console.log('user -> ', user)
       sessionStorage.setItem('Auth Token', user.stsTokenManager.refreshToken)
@@ -47,9 +50,9 @@ export const AuthProvider = ({ children }) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       if(errorCode == 'auth/weak-password'){
-        alert('Password is too weak');
+        warningPassword('Password is too weak');
       }else {
-        alert(errorMessage);
+        msgError(errorMessage);
       }
       console.log(error)
     }
@@ -64,19 +67,20 @@ export const AuthProvider = ({ children }) => {
         email,
         password
       );
+      successLoginSignUp('Hola de nuevo!')
       const user = userCredential.user;
       sessionStorage.setItem('Auth Token', user.stsTokenManager.refreshToken)
       navigate('/profile');
       return true
     } catch(error) {
-      return {
-        error: error.message}
-    }
+      msgError(error.message)
+    };
   };
   //SIGNOUT
   const logOut = async() => {
     try {
       await signOut(auth)
+      logOutMsg()
       navigate('/')
       return true
     }catch(error) {return false}

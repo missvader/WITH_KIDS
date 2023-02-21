@@ -1,5 +1,5 @@
 import React, {useState, useContext} from "react";
-import { FaHeart } from 'react-icons/fa';
+import { FaHeart, FaRegHeart} from 'react-icons/fa';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import {db} from "../firebase/firebase";
 import { AuthContext } from "../contexts/AuthProvider";
@@ -49,7 +49,7 @@ const Biblio = ({titol,id, tags, adreca,  data, dies, durada, tipus, publico, im
             onClick={addFavoriteBiblio}>
               {like ? 
               <FaHeart color="red" size="25px"/> :
-              <FaHeart size="25px"/>
+              <FaRegHeart size="25px"/>
               }
           </button>
           <button 
