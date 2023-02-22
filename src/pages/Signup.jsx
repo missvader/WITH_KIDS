@@ -31,6 +31,7 @@ export default function Signup(){
     setPassword("");
     setUsername("");
   }
+  /*"input input-bordered w-full max-w-xs text-gray-400 "*/
   return(
       <div className=" flex flex-col mt-1 md:w-2/3 lg:w-3/5 xl:w-2/5 m-auto" >
         <div className="m-5">
@@ -61,9 +62,10 @@ export default function Signup(){
             required
             className={
               error
-                ? "input input-bordered input-error w-full max-w-xs "
-                : "input input-bordered w-full max-w-xs text-gray-400 "
-            }
+                ? "input input-bordered input-error w-full max-w-xs"
+                : "input input-bordered w-full max-w-xs text-gray-400"
+            }   
+          
           />
           <input
             onChange={(e) => setEmail(e.target.value)}
