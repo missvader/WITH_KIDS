@@ -13,7 +13,8 @@ module.exports = {
       'azul' : '#6986F6' ,
       'verde' : '#24CE81' ,
       'blanco' : '#fafafa',
-      'dorado' : '#f5BA41'
+      'dorado' : '#f5BA41',
+      'amarilloCard':'#EEC64F'
     },
     borderRadius: {
       'none': '0',

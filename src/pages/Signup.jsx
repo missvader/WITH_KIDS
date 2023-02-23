@@ -49,7 +49,7 @@ export default function Signup(){
             </h2>
             <p className="mt-1 text-center text-sm font-normal ">
               ¿Ya estás registrad@?
-            <NavLink to="/login" className="font-medium text-purple-600 hover:text-purple-800 hover:text-lg">
+            <NavLink to="/login" className="font-medium text-lila hover:text-purple-800 hover:text-lg">
               &nbsp;Login
             </NavLink>
             </p>

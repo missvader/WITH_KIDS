@@ -6,7 +6,7 @@ import Background from "../assets/backgroundApp.png"
 const Preloader = () => {
   return (
    <div className=" flex flex-col static w-screen h-full" id="">
-      <img src={Background} alt="background" className="bg-image w-screen absolute bottom-0 opacity-50"/>
+      <img src={Background} alt="background" className="bg-image w-screen absolute bottom-0 opacity-70"/>
       <div className="mx-14 mt-12">
         <p className="text-center text-xl  text-azul uppercase mx-8 font-normal">Disfruta de la ciudad con tus hijos</p>
       </div>
