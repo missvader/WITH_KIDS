@@ -30,7 +30,7 @@ export default function Login(){
     <div className=" flex flex-col grid justify-items-center md:w-2/3 lg:w-3/5 xl:w-2/5 m-auto static h-screen w-screen" >
         <img src={Background} alt="background" className="bg-image w-screen absolute bottom-0 opacity-50"/>
       <div className="container absolute flex flex-col ">
-        <div className="m-5 ">
+        <div className="m-5">
           <div className="flex justify-center mt-10">
             <img 
             alt="logo"
