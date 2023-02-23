@@ -9,8 +9,8 @@ const Restaurants = () => {
     const dataRest = geoRestaurantes.features;
   
   return (
-    <div className="container ">
-            <div>
+    <div className="container h-6/7">
+            <div className=" ">
             {
               dataRest?.map((item, index)=> (
                 <Restaurant
@@ -26,6 +26,7 @@ const Restaurants = () => {
               ))
               }
             </div>
+            
           </div>
   )
 }

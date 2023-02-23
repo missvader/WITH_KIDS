@@ -2,7 +2,7 @@ import {useState, useContext, useEffect} from "react";
 import {NavLink } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import Logo from '../assets/withKidsLogo.png';
-
+import Background from "../assets/backgroundApp.png"
 export default function Signup(){
   
   const {
@@ -33,9 +33,11 @@ export default function Signup(){
   }
   /*"input input-bordered w-full max-w-xs text-gray-400 "*/
   return(
-      <div className=" flex flex-col mt-1 md:w-2/3 lg:w-3/5 xl:w-2/5 m-auto" >
-        <div className="m-5">
-          <div className="flex justify-center">
+      <div className=" flex flex-col mt-1 md:w-2/3 lg:w-3/5 xl:w-2/5 m-auto h-screen " >
+          <img src={Background} alt="background" className="bg-image w-screen absolute bottom-0 opacity-50"/>
+
+        <div className="m-5 ">
+          <div className="flex justify-center ">
             <img 
             alt="logo"
             className="h-28 w-40 md:h-28 md:w-40 lg:h-40 lg:w-60"
@@ -52,7 +54,7 @@ export default function Signup(){
           </NavLink>
           </p>
         </div>
-        <form className="m-4 space-y-6 form flex flex-col justify-center items-center" onSubmit={handleSubmit}>
+        <form className="m-4 space-y-6 form flex flex-col justify-center items-center " onSubmit={handleSubmit}>
           <input
             onChange={(e) => setUsername(e.target.value)}
             name="username"

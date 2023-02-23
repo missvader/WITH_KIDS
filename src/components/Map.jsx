@@ -162,7 +162,7 @@ const Map = () => {
     return () => map.remove()
   },[])
   return (
-    <div ref={mapContainer} className="map-container map h-5/6"></div>
+    <div ref={mapContainer} className="map-container map "></div>
   );
 }
   

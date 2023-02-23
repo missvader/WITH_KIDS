@@ -14,7 +14,7 @@ const AgendaBiblios = () => {
   console.log("favBiblio",favBiblio )
   
   return (
-    <div className="container ">
+    <div className="container h-6/7">
             <div>
             {
               actBiblio?.map(item => (

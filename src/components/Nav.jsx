@@ -11,7 +11,7 @@ const Nav = () => {
  
   return (
     <div className="">
-    <div className="nav h-1/7 flex flex-col w-full m-auto bg-blanco fixed
+      {/*<div className="nav h-1/7 flex flex-col w-full m-auto bg-blanco fixed
      bottom-0 ">
       <div className="flex m-auto">
         <NavLink
@@ -56,18 +56,61 @@ const Nav = () => {
         </i>
         <span className="nav-text text-sm font-bold">BiblioAgenda</span>
       </NavLink>
-      {/*<NavLink 
-        to={"./zonesDeJoc"}
-        className="nav-item">
-        <i className=" icon parc-icon">
-          <Icon path={mdiSlide} size={1} />
-        </i>
-        <span className="nav-text text-sm font-bold">Area joc</span>
-  </NavLink>*/}
       </div>
       
-    </div>
-    </div>
+  </div>*/}
+  
+
+  
+      <div className="btm-nav flex flex-col pb-5 bg-blanco w-full pb-5  rounded-t">
+        <div className="flex m-auto ">
+          <NavLink
+          to={"./"}
+          >
+            <button className="btn btn-xs bg-stone-400 border-0">
+            <Icon path={mdiMapOutline} size={1} />
+            </button>
+          </NavLink>
+        </div>
+        <div className="flex flex-row w-full">
+          <NavLink
+          to={"./profile"}
+          className= "nav-item "
+          >
+            <i className="icon user-icon">
+              <Icon path={mdiAccount} size={1} />
+            </i>
+            <span className="nav-text text-sm font-bold">Usuari</span>
+          </NavLink>
+          <NavLink 
+        to={"./agendaCultural"}
+        className="nav-item ">
+        <i className="icon agenda-icon">
+          <Icon path={mdiTicket} size={1} />
+        </i>
+        <span className="nav-text text-sm font-bold">Agenda</span>
+      </NavLink>
+      <NavLink 
+        to={"./restaurants"}
+        className="nav-item ">
+        <i className=" icon restaurant-icon">
+          <Icon path={mdiSilverwareForkKnife}  size={1} />
+        </i>
+        <span className="nav-text text-sm font-bold">Restaurants</span>
+      </NavLink>
+      <NavLink 
+        to={"./agendaBiblio"}
+        className="nav-item">
+        <i className=" icon biblio-icon">
+          <Icon path={mdiBookOpenPageVariant} size={1} />
+        </i>
+        <span className="nav-text text-sm font-bold">BiblioAgenda</span>
+      </NavLink>
+        </div>
+  
+        </div>
+</div>
+    
   )
 }
 
