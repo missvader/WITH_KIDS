@@ -7,7 +7,7 @@ const Agenda = () => {
   const {filteredAct}= useContext(DataContext);
   
   return (
-    <div className="container ">
+    <div className="container h-6/7 ">
             <div>
             {
               filteredAct?.map((item)=> (
@@ -15,9 +15,14 @@ const Agenda = () => {
                   key={item.codi}
                   id={item.codi}
                   titol={item.denominaci}
-                  adreca={item.espai}
+                  espai={item.espai}
+                  adreca={item.adre_a}
+                  telefon={item.tel_fon}
+                  email={item.email}
+                  horari={item.horari}
                   data={item.data_inici}
                   entrades= {item.entrades}
+                  tags={item.tags_categor_es}
                   image= {item.imatges}
                   errorImage = {item.imgapp}
                   url={item.url}

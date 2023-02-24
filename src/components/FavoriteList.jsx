@@ -1,30 +1,26 @@
-import React, {useState} from "react";
-import FavoritesAgenda from "./FavoritesAgenda";
-import FavoritesBiblio from "./FavoritesBiblio";
-import FavoritesRest from "./FavoritesRest";
+import React from "react";
+import { Link } from "react-router-dom";
+
 
 const FavoriteList = () => {
-  /*Aqui va la logica de los 3 botones que renderizaran cada uno de los componentes de favoritos */
-  const [selectedFav, setSelectedFav] = useState(null)
-  const selectComponent = (componentId) => {
-    switch(componentId){
-      case 1:
-        return <FavoritesAgenda/>;
-      case 2: 
-        return <FavoritesBiblio/>;
-      case 3: 
-        return <FavoritesRest/>;
-      default:
-        return null;
-    }
-  }
-
+  
   return (
-    <div>
-        <button className="p-4" onClick={()=>setSelectedFav(1)}>AGENDA</button>
-        <button className="p-4" onClick={()=>setSelectedFav(2)}>BIBLIOS</button>
-        <button className="p-4" onClick={()=>setSelectedFav(3)}>RESTAURANTEs</button>
-        {selectComponent(selectedFav)}
+    <div className="flex flex-col grid place-content-center">
+      <Link to="/favoritesAgenda">
+        <div className="p-4 w-64 bg-naranja rounded-md m-5 text-white text-center" >
+          AGENDA CULTURAL
+        </div>
+      </Link>
+      <Link to="/favoritesRest">
+        <div className="p-4 w-64 bg-amarillo rounded-md m-5 text-center " >
+          RESTAURANTS
+        </div>
+      </Link>  
+      <Link to="/favoritesBiblio">
+        <div className="p-4 w-64 bg-lila rounded-md m-5 text-white text-center" >
+          BIBLIO AGENDA
+        </div>
+      </Link>  
     </div>
   )
 }

@@ -36,12 +36,12 @@ const Biblio = ({titol,id, tags, adreca, espai, data,telefon, dies,horari, durad
   <div className="container w-full mb-4 container-cards relative">
     <img src={Background} alt="background" className="bg-image absolute bottom-0 opacity-30"/>
     <div className="card lg:card-side bg-lilaCard shadow-xl m-10 rounded ">
-      <figure>
+      <figure >
         <img 
         src={imatge} 
         onError={(e) => (e.target.src = errorImage)}
         alt="biblio activity image"
-        className="w-full h-[223px] rounded"
+        className=" h-[223px] w-full  rounded "
         /></figure>
       <div className="card-body">
         <div className="card-title  rounded-lg p-2"> 

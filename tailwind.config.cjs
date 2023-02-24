@@ -15,7 +15,8 @@ module.exports = {
       'blanco' : '#fafafa',
       'dorado' : '#f5BA41',
       'amarilloCard':'#EEC64F',
-      'lilaCard' : '#E890DB'
+      'lilaCard' : '#E890DB',
+      'naranjaCard' : '#FAB741'
     },
     borderRadius: {
       'none': '0',

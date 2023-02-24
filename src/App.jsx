@@ -9,10 +9,12 @@ import Nav from './components/Nav';
 import Agenda from "./pages/Agenda";
 import Restaurants from "./pages/Restaurants";
 import AgendaBiblios from "./pages/AgendaBiblios";
-/*import AreasJoc from "./pages/AreasJoc";*/
 import Preloader from './components/Preloader';
 import Signup from './pages/Signup'
 import Login from './pages/Login';
+import FavoritesAgenda from './pages/FavoritesAgenda';
+import FavoritesRest from './pages/FavoritesRest';
+import FavoritesBiblio from './pages/FavoritesBiblio';
 import PrivateRoute from './Routes/PrivateRoute';
 import { AuthProvider } from './contexts/AuthProvider';
 
@@ -42,6 +44,9 @@ function App() {
                   < Route path='/agendaBiblio' element = {<AgendaBiblios/>}/>
                   < Route path="/signup" element={<Signup/>} />
                   < Route path="/login" element={<Login/>} />
+                  < Route path='/favoritesRest' element={<FavoritesRest/>}/>
+                  < Route path='/favoritesAgenda' element={<FavoritesAgenda/>}/>
+                  < Route path='/favoritesBiblio' element={<FavoritesBiblio/>}/>
                 </Routes>  
                 <Nav/>
               </div>
