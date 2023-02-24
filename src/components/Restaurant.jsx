@@ -29,54 +29,50 @@ const Restaurant = ({name, address, web, phone, tags, image,id}) => {
   return (
     <div className="container w-full mb-4 container-cards relative">
       <img src={Background} alt="background" className="bg-image absolute bottom-0 opacity-30"/>
-
-    <div className="card lg:card-side bg-amarilloCard shadow-xl m-10 rounded ">
-      <figure>
-        <img
-          src={image}
-          alt="restaurant  image"
-          className="w-full h-[223px] rounded"
-        />
+      <div className="card lg:card-side bg-amarilloCard shadow-xl m-10 rounded ">
+        <figure>
+          <img
+            src={image}
+            alt="restaurant  image"
+            className="w-full h-[223px] rounded"
+          />
         </figure>
-      <div className="card-body">
-        <div className="card-title  rounded-lg p-2"> 
-          <h2 className="uppercase font-sans font-semibold">{name}</h2>
-        </div>
-        <div className="px-2 pb-2 font-sans font-medium">
-          <p className="py-1 ">{address}</p>
-          <p className="py-1">{phone}</p>
-          <div className="grid gap-2">
-          {
+        <div className="card-body">
+          <div className="card-title  rounded-lg p-2"> 
+            <h2 className="uppercase font-sans font-semibold">{name}</h2>
+          </div>
+          <div className="px-2 pb-2 font-sans font-medium">
+            <p className="py-1 ">{address}</p>
+            <p className="py-1">{phone}</p>
+            <div className="flex flex-wrap">
+            {
               tags?.map((tag, index)=> {
                 return (
                   <div key={index}  >
-                    <div className="badge badge-lg p-3 badge-ghost m-2">{tag}</div>
+                    <div className="badge  d-block badge-lg p-3 badge-ghost m-2 bg-white/25">{tag}</div>
 
                     
                   </div>
                 )
               })
-                
-              
               }
-          </div>
-        </div> 
-
-        <div className="card-actions flex justify-between">
-          <button className="  " onClick={addFavoriteRest}>
-            {like ? 
+            </div>
+          </div> 
+          <div className="card-actions flex justify-between">
+            <button onClick={addFavoriteRest}>
+              {like ? 
               <FaHeart color="red" size="25px"/> :
               <FaRegHeart size="25px" />
-            }
-          </button>
-          <button 
-          className="btn bg-lila btn-sm"
-          onClick={() => window.open(web, '_blank')}
-          >+ INFO</button>
+              }
+            </button>
+            <button 
+              className="btn bg-lila btn-sm"
+              onClick={() => window.open(web, '_blank')}
+            >+ INFO</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   )
 }
 export default Restaurant;

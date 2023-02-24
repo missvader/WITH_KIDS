@@ -41,9 +41,9 @@ export default function Login(){
           <h2 className="mt-4 text-center text-lg  text-lila">
             ACCEDE A TU CUENTA
           </h2>
-          <p className="mt-1 text-center text-sm font-normal ">
+          <p className="mt-1 text-center text-sm font-medium text-gray-600 ">
             ¿Aún no tienes cuenta?
-          <NavLink to="/signup" className="text-sm font-normal text-lila hover:text-purple-800 hover:text-lg">
+          <NavLink to="/signup" className="text-sm font-medium text-lila hover:text-purple-800 hover:text-lg">
             &nbsp;Registrate
           </NavLink>
           </p>

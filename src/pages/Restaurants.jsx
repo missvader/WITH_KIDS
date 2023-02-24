@@ -1,8 +1,7 @@
 import React from "react";
-import {useContext , useState, useEffect} from "react";
+import {useContext} from "react";
 import { DataContext } from "../contexts/DataContext";
 import Restaurant from "../components/Restaurant";
-import Background from "../assets/backgroundApp.png"
 import "../App.css"
 
 const Restaurants = () => {
@@ -11,9 +10,7 @@ const Restaurants = () => {
   
   return (
     <div className="container h-6/7">
-
-        <div className="">
-
+        <div>
             {
               dataRest?.map((item, index)=> (
                 <Restaurant
@@ -28,9 +25,8 @@ const Restaurants = () => {
                 />
               ))
               }
-            </div>
-            
-          </div>
+        </div>
+    </div>
   )
 }
 

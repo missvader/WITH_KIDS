@@ -31,13 +31,12 @@ export default function Signup(){
     setPassword("");
     setUsername("");
   }
-  /*"input input-bordered w-full max-w-xs text-gray-400 "*/
   return(
       <div className="  flex flex-col grid justify-items-center md:w-2/3 lg:w-3/5 xl:w-2/5 m-auto static h-screen w-screen " >
           <img src={Background} alt="background" className="bg-image w-screen absolute bottom-0 opacity-50"/>
         <div className="container absolute flex flex-col ">
           <div className=" ">
-            <div className="flex justify-center mt-10">
+            <div className="flex justify-center mt-7">
               <img 
               alt="logo"
               className="logo"
@@ -47,7 +46,7 @@ export default function Signup(){
             <h2 className="mt-4 text-center text-lg  text-lila">
             REGISTRATE
             </h2>
-            <p className="mt-1 text-center text-sm font-normal ">
+            <p className="mt-1 text-center text-sm font-medium text-gray-600">
               ¿Ya estás registrad@?
             <NavLink to="/login" className="font-medium text-lila hover:text-purple-800 hover:text-lg">
               &nbsp;Login

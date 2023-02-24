@@ -1,18 +1,12 @@
-import React, { useEffect , useState} from "react";
+import React from "react";
 import {useContext } from "react";
 import { DataContext } from "../contexts/DataContext";
 import Biblio from "../components/Biblio";
+import errorBiblioImage from "../assets/errorBiblioImage2.jpg"
 import "../App.css"
 
 const AgendaBiblios = () => {
   const {actBiblio }= useContext(DataContext)
-  const [favBiblio, setFavBiblio] = useState([])
-  const addFavBiblio = (actBiblio) =>{
-    const newFavList = [ actBiblio];
-    setFavBiblio(newFavList);
-  }
-  console.log("favBiblio",favBiblio )
-  
   return (
     <div className="container h-6/7">
             <div>
@@ -22,16 +16,18 @@ const AgendaBiblios = () => {
                   key={item.acte_id}
                   id={item.acte_id}
                   titol={item.titol}
-                  adreca={item.acte_organitzadors}
-                  tags={item.tags[0]}
+                  espai={item.grup_adreca.adreca_nom}
+                  tags={item.tipus}
                   data={item.data_inici}
                   dies={item.dies}
+                  horari={item.observacions_horari}
                   durada={item.durada}
-                  tipus={item.tipus}
+                  telefon = {item.telefon_contacte}
+                  adreca = {item.grup_adreca.adreca}
                   publico={item.public}
                   imatge= {item.imatge}
+                  errorImage = {errorBiblioImage}
                   url= {item.acte_url}
-                  addFavActBiblio={addFavBiblio}
                 />
               ))
               }

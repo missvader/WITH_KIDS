@@ -14,7 +14,8 @@ module.exports = {
       'verde' : '#24CE81' ,
       'blanco' : '#fafafa',
       'dorado' : '#f5BA41',
-      'amarilloCard':'#EEC64F'
+      'amarilloCard':'#EEC64F',
+      'lilaCard' : '#E890DB'
     },
     borderRadius: {
       'none': '0',
