@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
       updateProfile(auth.currentUser, {
         displayName:username,
       });
-      successLoginSignUp('Registro completado')
+      successLoginSignUp('Registre completat')
       const user = userCredential.user;
       console.log('user -> ', user)
       sessionStorage.setItem('Auth Token', user.stsTokenManager.refreshToken)
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
         email,
         password
       );
-      successLoginSignUp('Hola de nuevo!')
+      successLoginSignUp('Usuari correcte')
       const user = userCredential.user;
       sessionStorage.setItem('Auth Token', user.stsTokenManager.refreshToken)
       navigate('/profile');

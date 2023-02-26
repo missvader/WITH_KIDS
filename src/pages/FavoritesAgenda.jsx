@@ -3,32 +3,13 @@ import {db} from "../firebase/firebase"
 import {updateDoc, doc, getDoc, onSnapshot} from "firebase/firestore";
 import {AiOutlineDelete} from "react-icons/ai"
 import { AuthContext } from "../contexts/AuthProvider";
-
+import Background from "../assets/backgroundApp.png"
+import HeaderAgenda from "../components/HeaderAgenda";
+import NoFav from "../components/NoFav";
 const FavoritesAgenda = () => {
   const {currentUser} = useContext(AuthContext)
   const [favAgenda, setFavAgenda] = useState([]);
   const favAgendaID = doc(db, 'users', `${currentUser.uid}`)
-
-  /*useEffect(() =>{
-    const getFavoritesAgenda = async () => {
-      const favoriteAgenda = await getDoc(favAgendaID)
-      setFavAgenda(favoriteAgenda.data().favoritesAgenda)
-    } 
-    getFavoritesAgenda();
-}, [])//lo dejo vacio o pongo currentUser???*/
-/*este delete agenda no funciona */
-  /*const deleteFavoriteAgenda = async (id) =>{
-    try{
-      const result = favAgenda.filter((item) => item.id !== id)
-      await updateDoc(favAgendaID, {
-          favoritesAgenda:result
-      })
-      setFavAgenda(result);
-      window.location.reload();
-    }catch (error){
-      console.log(error)
-    }
-  }*/
   
 /*OBTENER FAV DE BASE DATOS */
 useEffect(() => {
@@ -46,28 +27,30 @@ const deletedAgenda = async (passedID) => {
   } catch (error) {
         console.log(error.message)
       };
-  
 }
   return (
-    <div className="container p-4">
-      <h2 className="text-center font-bold font-sans underline">AGENDA ACTIVIDADES BARCELONA</h2>
-            <div>
+    <div className="container flex flex-col  m-auto static h-screen  w-screen overflow-auto ">
+      <img src={Background} alt="background" className="bg-image fixed bottom-0 opacity-50"/>
+      <div className="container absolute flex flex-col ">
+        <HeaderAgenda/>
+            <div className="mb-16">
             {
-              favAgenda?.map((item)=> {
+              (favAgenda.length > 0)
+              ? favAgenda.map((item)=> {
                 return (
-                  <div key={item.id} className="flex flex-col">
-                    <p>{item?.titol}</p>
-                    <button className="justify-end" onClick={()=>deletedAgenda(item.id)}>
-                      <AiOutlineDelete/>
+                  <div key={item.id} className="grid grid-flow-cols bg-white border-2 border-naranja mx-10 my-5 min-h-16 rounded">
+                    <p className="self-cemter ml-3 text-naranja font-semibold">{item.titol}</p>
+                    <button className="justify-self-end self-end mr-3 mb-2" onClick={()=>deletedAgenda(item.id)}>
+                      <AiOutlineDelete size={20} className=""/>
                     </button>
                   </div>
                 )
               })
-                
-              
+              : <NoFav/>  
               }
             </div>
           </div>
+    </div>
   )
 }
 export default FavoritesAgenda;

@@ -3,7 +3,6 @@ import { FaHeart, FaRegHeart,FaCalendar} from 'react-icons/fa';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import {db} from "../firebase/firebase";
 import { AuthContext } from "../contexts/AuthProvider";
-import Background from "../assets/backgroundApp.png"
 
 
 const Biblio = ({titol,id, tags, adreca, espai, data,telefon, dies,horari, durada,errorImage, publico, imatge, url}) => {
@@ -33,8 +32,7 @@ const Biblio = ({titol,id, tags, adreca, espai, data,telefon, dies,horari, durad
     }
   }
   return (
-  <div className="container w-full mb-4 container-cards relative">
-    <img src={Background} alt="background" className="bg-image absolute bottom-0 opacity-30"/>
+  <div className=" mb-4 container-cards ">
     <div className="card lg:card-side bg-lilaCard shadow-xl m-10 rounded ">
       <figure >
         <img 

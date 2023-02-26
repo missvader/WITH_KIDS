@@ -3,13 +3,16 @@ import {useContext} from "react";
 import { DataContext } from "../contexts/DataContext";
 import Restaurant from "../components/Restaurant";
 import "../App.css"
+import Background from "../assets/backgroundApp.png"
 
 const Restaurants = () => {
     const { geoRestaurantes}= useContext(DataContext);
     const dataRest = geoRestaurantes.features;
   
   return (
-    <div className="container h-6/7">
+    <div className="container flex flex-col  m-auto static h-screen  w-screen overflow-auto ">
+      <img src={Background} alt="background" className="bg-image fixed bottom-0 opacity-50"/>
+      <div className="container absolute flex flex-col mb-10">
         <div>
             {
               dataRest?.map((item, index)=> (
@@ -26,6 +29,7 @@ const Restaurants = () => {
               ))
               }
         </div>
+      </div>
     </div>
   )
 }

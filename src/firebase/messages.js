@@ -25,7 +25,7 @@ export const logOutMsg = () => {
       imageWidth: 150,
       imageHeight: 150,
       imageAlt: 'Custom image',
-      title: 'Hasta la próxima!',
+      title: 'Fins aviat!',
       timer: 3000
   })
 }

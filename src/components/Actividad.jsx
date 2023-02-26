@@ -3,7 +3,6 @@ import { FaHeart, FaRegHeart, FaCalendar, FaPhone, FaEnvelope, FaClock } from 'r
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import {db} from "../firebase/firebase";
 import { AuthContext } from "../contexts/AuthProvider";
-import Background from "../assets/backgroundApp.png"
 
 const Actividad = ({titol,id, adreca, espai,entrades,horari,tags, telefon, email, data, image, errorImage, url, link, addFavAct}) => {
   const urlImage = `https://agenda.cultura.gencat.cat` + image;
@@ -43,8 +42,7 @@ const Actividad = ({titol,id, adreca, espai,entrades,horari,tags, telefon, email
   }
 
   return (
-    <div className="container w-full mb-4 container-cards relative">
-      <img src={Background} alt="background" className="bg-image absolute bottom-0 opacity-30"/>
+    <div className="mb-4 container-cards ">
       <div className="card lg:card-side bg-naranjaCard shadow-xl m-10 rounded">
         <figure className="w-full h-[223px]">
           <img 

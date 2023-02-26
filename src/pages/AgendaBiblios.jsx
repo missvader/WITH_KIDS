@@ -4,11 +4,14 @@ import { DataContext } from "../contexts/DataContext";
 import Biblio from "../components/Biblio";
 import errorBiblioImage from "../assets/errorBiblioImage2.jpg"
 import "../App.css"
+import Background from "../assets/backgroundApp.png"
 
 const AgendaBiblios = () => {
   const {actBiblio }= useContext(DataContext)
   return (
-    <div className="container h-6/7">
+    <div className="container flex flex-col  m-auto static h-screen  w-screen overflow-auto ">
+      <img src={Background} alt="background" className="bg-image fixed bottom-0 opacity-50"/>
+      <div className="container absolute flex flex-col mb-10">
             <div>
             {
               actBiblio?.map(item => (
@@ -33,6 +36,7 @@ const AgendaBiblios = () => {
               }
             </div>
           </div>
+    </div>          
   )
 }
 

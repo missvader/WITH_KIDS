@@ -3,7 +3,6 @@ import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import { FaHeart, FaRegHeart} from 'react-icons/fa';
 import { AuthContext } from "../contexts/AuthProvider"; 
 import { db } from "../firebase/firebase";
-import Background from "../assets/backgroundApp.png"
 
 const Restaurant = ({name, address, web, phone, tags, image,id}) => {
   const [like, setLike] = useState(false)
@@ -27,8 +26,7 @@ const Restaurant = ({name, address, web, phone, tags, image,id}) => {
     }
   }
   return (
-    <div className="container w-full mb-4 container-cards relative">
-      <img src={Background} alt="background" className="bg-image absolute bottom-0 opacity-30"/>
+    <div className="mb-4 container-cards ">
       <div className="card lg:card-side bg-amarilloCard shadow-xl m-10 rounded ">
         <figure>
           <img

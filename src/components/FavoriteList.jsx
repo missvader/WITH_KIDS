@@ -11,7 +11,7 @@ const FavoriteList = () => {
           AGENDA CULTURAL
         </div>
       </Link>
-      <Link to="/favoritesRest">
+      <Link to="/restFavorites">
         <div className="p-4 w-64 bg-amarillo rounded-md m-5 text-center " >
           RESTAURANTS
         </div>
