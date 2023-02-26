@@ -1,33 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
+import 'mapbox-gl/dist/mapbox-gl.css';
+import { Route, Routes } from 'react-router-dom';
+import { useState , useEffect} from 'react';
+import Home from './pages/Home';
+import Data from './contexts/Data';
+import Profile from './pages/Profile';
+import Nav from './components/Nav';
+import Agenda from "./pages/Agenda";
+import Restaurants from "./pages/Restaurants";
+import AgendaBiblios from "./pages/AgendaBiblios";
+import Preloader from './components/Preloader';
+import Signup from './pages/Signup'
+import Login from './pages/Login';
+import FavoritesAgenda from './pages/FavoritesAgenda';
+import RestFavorites from './pages/RestFavorites';
+import FavoritesBiblio from './pages/FavoritesBiblio';
+import PrivateRoute from './Routes/PrivateRoute';
+import { AuthProvider } from './contexts/AuthProvider';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [loading, setLoading] = useState(true);
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 5000);
+    },[]);
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <AuthProvider>
+      <Data>
+        <div>
+          {loading ? (<Preloader/>) :
+            (
+              <div className='relative'>
+                <Routes>
+                  < Route path='/' element = {<Home/>}/>
+                  < Route path='/profile' element = {
+                      <PrivateRoute>
+                        <Profile />
+                      </PrivateRoute>
+                    }/>
+                  < Route path='/agendaCultural' element = {<Agenda/>} />
+                  < Route path='/restaurants' element = {<Restaurants/>}/>
+                  < Route path='/agendaBiblio' element = {<AgendaBiblios/>}/>
+                  < Route path="/signup" element={<Signup/>} />
+                  < Route path="/login" element={<Login/>} />
+                  < Route path='/restFavorites' element={<RestFavorites/>}/>
+                  < Route path='/favoritesAgenda' element={<FavoritesAgenda/>}/>
+                  < Route path='/favoritesBiblio' element={<FavoritesBiblio/>}/>
+                </Routes>  
+                <Nav/>
+              </div>
+            )
+          }
+        </div>  
+      </Data>
+    </AuthProvider>
   )
 }
 
