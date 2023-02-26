@@ -4,7 +4,7 @@ import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import {db} from "../firebase/firebase";
 import { AuthContext } from "../contexts/AuthProvider";
 
-const Actividad = ({titol,id, adreca, espai,entrades,horari,tags, telefon, email, data, image, errorImage, url, link, addFavAct}) => {
+const Actividad = ({titol,id, adreca, espai,horari,tags, telefon, email, data, image, errorImage, link}) => {
   const urlImage = `https://agenda.cultura.gencat.cat` + image;
   const urlErrorImage = `https://agenda.cultura.gencat.cat` + errorImage;
   const linkToUrl = link.split(",")[0];
@@ -33,7 +33,9 @@ const Actividad = ({titol,id, adreca, espai,entrades,horari,tags, telefon, email
       await updateDoc(favAgendaID, {
         favoritesAgenda: arrayUnion({
           id:id,
-          titol: titol
+          titol: titol,
+          espai:espai,
+          linkToUrl:linkToUrl
         })
       })
     }else{
@@ -43,16 +45,16 @@ const Actividad = ({titol,id, adreca, espai,entrades,horari,tags, telefon, email
 
   return (
     <div className="mb-4 container-cards ">
-      <div className="card lg:card-side bg-naranjaCard shadow-xl m-10 rounded">
-        <figure className="w-full h-[223px]">
+      <div className="card  bg-naranjaCard shadow-xl m-10 rounded ">
+        <figure className="w-full h-[250px]">
           <img 
           src={urlImage} 
           alt="agenda activity image"
           onError={(e) => (e.currentTarget.src = urlErrorImage)}
-          className= "object-cover rounded"
+          className= "object-cover rounded lg:w-full"
           />
         </figure>
-      <div className="card-body">
+      <div className="card-body ">
         <div className="card-title rounded-lg p-2"> 
           <h2 className="uppercase font-sans font-semibold">{titol}</h2>
         </div>

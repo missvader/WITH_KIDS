@@ -24,7 +24,9 @@ const Biblio = ({titol,id, tags, adreca, espai, data,telefon, dies,horari, durad
       await updateDoc(favBiblioID, {
           favoritesBiblio: arrayUnion({
           id:id,
-          titol: titol
+          titol: titol,
+          espai:espai,
+          url:url
         })
       })
     }else{
@@ -33,7 +35,7 @@ const Biblio = ({titol,id, tags, adreca, espai, data,telefon, dies,horari, durad
   }
   return (
   <div className=" mb-4 container-cards ">
-    <div className="card lg:card-side bg-lilaCard shadow-xl m-10 rounded ">
+    <div className="card bg-lilaCard shadow-xl m-10 rounded ">
       <figure >
         <img 
         src={imatge} 

@@ -18,7 +18,8 @@ const Restaurant = ({name, address, web, phone, tags, image,id}) => {
       await updateDoc(favRestID, {
         favoritesRestaurants: arrayUnion({
           id:id,
-          name:name
+          name:name,
+          phone:phone
         })
       })
     }else{
@@ -27,7 +28,7 @@ const Restaurant = ({name, address, web, phone, tags, image,id}) => {
   }
   return (
     <div className="mb-4 container-cards ">
-      <div className="card lg:card-side bg-amarilloCard shadow-xl m-10 rounded ">
+      <div className="card bg-amarilloCard shadow-xl m-10 rounded ">
         <figure>
           <img
             src={image}
@@ -48,8 +49,6 @@ const Restaurant = ({name, address, web, phone, tags, image,id}) => {
                 return (
                   <div key={index}  >
                     <div className="badge  d-block badge-lg p-3 badge-ghost m-2 bg-white/25">{tag}</div>
-
-                    
                   </div>
                 )
               })

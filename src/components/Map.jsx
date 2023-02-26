@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useContext, useState} from 'react';
 import mapboxgl from 'mapbox-gl'; 
 import { DataContext } from "../contexts/DataContext";
 import IconNaranja from "../assets/icons-map/_event-ticket.svg";
-import IconVerde from "../assets/icons-map/_playground.svg";
 import IconLila from "../assets/icons-map/_event-book.svg";
 import IconYellow from "../assets/icons-map/_restaurant.svg"
 
@@ -24,7 +23,7 @@ const Map = () => {
     const map = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/missvader/cle6y069y000r01qw92ghrlkr",
-      center: [2.15899, 41.38879],
+      center: [2.15999, 41.39979],
       zoom: 11.5,
       
     });
@@ -114,7 +113,7 @@ const Map = () => {
       const popup2 = new mapboxgl.Popup({ offset: [0, -15] , className:"agenda-popup"})
       .setLngLat(feature.geometry.coordinates)
       .setHTML(
-      `<h3>${feature.properties.titol}</h3><p>ESPAI: ${feature.properties.espai}</p><p>INICI: ${feature.properties.inici}/FI: ${feature.properties.fi}</p><p>${feature.properties.tags}</p>`
+      `<h3>${feature.properties.titol}</h3><p>ESPAI: ${feature.properties.espai}</p>`
       )
       .addTo(map);
     });
@@ -130,7 +129,7 @@ const Map = () => {
       const popup2 = new mapboxgl.Popup({ offset: [0, -15] , className:"biblio-popup"})
       .setLngLat(feature.geometry.coordinates)
       .setHTML(
-      `<h3>${feature.properties.titol}</h3><p>ESPAI: ${feature.properties.organitzadors}</p><p>INICI: ${feature.properties.inici}/FI: ${feature.properties.fi}</p><p>${feature.properties.dies}</p>`
+      `<h3>${feature.properties.titol}</h3><p>ESPAI: ${feature.properties.organitzadors}</p>`
       )
       .addTo(map);
     });
@@ -150,14 +149,7 @@ const Map = () => {
       )
       .addTo(map);
     });
-    // Change the cursor to a pointer when the mouse is over the places layer.
-  /*map.on('mouseenter','parcsbcn',() => {
-    map.getCanvas().style.cursor = 'pointer';
-  });
-  // Change it back to a pointer when it leaves.
-  map.on('mouseleave','parcsbcn',() => {
-    map.getCanvas().style.cursor = '';
-  });*/
+   
   // cleanup function to remove map on unmount
     return () => map.remove()
   },[])

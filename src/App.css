@@ -120,3 +120,17 @@
 .input{
   width: 17rem;
 }
+@media (min-width: 1024px) { 
+  .input{
+    width: 25rem;
+  }
+  .map-container{
+    width: 75%;
+    height: 75%;
+    margin: 5rem;
+    border:5px solid grey;
+    border-radius: 20px;
+    margin: auto;
+    margin-bottom: 7rem;
+  }
+}
