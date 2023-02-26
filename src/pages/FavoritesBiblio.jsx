@@ -58,7 +58,6 @@ const deletedBiblio = async (passedID) => {
                 )
               })
               : <NoFav/>  
-              
               }
             </div>
           </div>

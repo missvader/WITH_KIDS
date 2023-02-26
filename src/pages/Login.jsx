@@ -1,4 +1,4 @@
-import {useState, useContext} from "react";
+import {useContext} from "react";
 import Logo from '../assets/withKidsLogo.png';
 import {NavLink} from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
@@ -22,7 +22,6 @@ export default function Login(){
     setEmail("");
     setPassword("");
   };
-  /*m-4 space-y-6  */
   return(
     <div className=" flex flex-col grid justify-items-center md:w-2/3 lg:w-3/5 xl:w-2/5 m-auto static h-screen w-screen" >
         <img src={Background} alt="background" className="bg-image w-screen fixed bottom-0 opacity-50 md:h-5/6"/>

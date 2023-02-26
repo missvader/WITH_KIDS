@@ -50,8 +50,6 @@ const deletedAgenda = async (passedID) => {
                         >info</a>
                       </button>
                     </div>
-                    
-
                     <button className="justify-self-end self-end mr-3 mb-2" onClick={()=>deletedAgenda(item.id)}>
                       <AiOutlineDelete size={20} className=""/>
                     </button>

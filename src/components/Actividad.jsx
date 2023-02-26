@@ -67,7 +67,7 @@ const Actividad = ({titol,id, adreca, espai,horari,tags, telefon, email, data, i
                 <FaClock size={20} className="mr-2 mt-2"/>
                 <p>{newHorari}</p>
               </div>
-            : null
+            : <></>
           }
           {
             telefon ?
@@ -75,7 +75,7 @@ const Actividad = ({titol,id, adreca, espai,horari,tags, telefon, email, data, i
                 <FaPhone className="" size={20}/> 
                 <p>&nbsp;{telefon}</p>
               </div> 
-            : null 
+            : <></> 
           }
           {
             email ?
@@ -83,7 +83,7 @@ const Actividad = ({titol,id, adreca, espai,horari,tags, telefon, email, data, i
                 <FaEnvelope className="" size={20}/> 
                 <p>&nbsp;{email}</p>
               </div> 
-            : null 
+            : <></> 
           }
           <div className="py-1 flex my-2">
               <FaCalendar className="" size={20}/> 
